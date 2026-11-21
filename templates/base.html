@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LexBrief AI - Legal Case Summarization & Research Assistant{% endblock %}</title>
+    <!-- Font & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Top Statutory & Ethical Legal Disclaimer Banner -->
+    <div class="legal-disclaimer-banner">
+        <div class="container banner-inner">
+            <span><i class="fa-solid fa-scale-balanced"></i> <strong>LEGAL RESEARCH NOTICE:</strong> LexBrief AI is an NLP-powered academic and research assistant. It does not provide formal legal advice or replace professional counsel.</span>
+            <a href="{{ url_for('disclaimer_page') }}" class="banner-link">Scope of Use & Disclaimers <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="app-header">
+        <div class="container header-container">
+            <a href="{{ url_for('index') }}" class="brand-logo">
+                <div class="brand-icon"><i class="fa-solid fa-gavel"></i></div>
+                <div class="brand-text">
+                    <span class="brand-name">LexBrief<span class="accent-gold">.AI</span></span>
+                    <span class="brand-id">Project ID: CSEAIML2026-P13</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-item {% if request.path == '/' %}active{% endif %}">
+                    <i class="fa-solid fa-house"></i> <span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('summarize_page') }}" class="nav-item {% if '/summarize' in request.path %}active{% endif %}">
+                    <i class="fa-solid fa-file-contract"></i> <span>Summarizer & Briefs</span>
+                </a>
+                <a href="{{ url_for('search_page') }}" class="nav-item {% if '/search' in request.path %}active{% endif %}">
+                    <i class="fa-solid fa-magnifying-glass"></i> <span>Semantic Precedents</span>
+                </a>
+                <a href="{{ url_for('compare_page') }}" class="nav-item {% if '/compare' in request.path %}active{% endif %}">
+                    <i class="fa-solid fa-columns"></i> <span>Case Comparison</span>
+                </a>
+                <a href="{{ url_for('evaluation_page') }}" class="nav-item {% if '/evaluation' in request.path %}active{% endif %}">
+                    <i class="fa-solid fa-chart-line"></i> <span>Evaluation & ROUGE</span>
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn btn-outline-gold" onclick="openEthicsModal()">
+                    <i class="fa-solid fa-shield-halved"></i> Ethics & Compliance
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content -->
+    <main class="app-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Ethical AI & Scope-of-Use Modal -->
+    <div id="ethicsModal" class="modal-backdrop" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-shield-halved accent-gold"></i> AI Governance, Scope of Use & Legal Disclaimers</h3>
+                <button class="modal-close" onclick="closeEthicsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="notice-callout">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Non-Substitute for Professional Legal Representation</h4>
+                    <p>LexBrief AI is an automated Natural Language Processing system created under <strong>Project ID: CSEAIML2026-P13</strong> for educational, research, and assistive purposes. It does not establish an attorney-client relationship, nor should its outputs be relied upon as binding legal advice.</p>
+                </div>
+                <h4>Key Ethical Principles:</h4>
+                <ul class="ethics-list">
+                    <li><i class="fa-solid fa-check-circle text-success"></i> <strong>Zero Hallucination Grounding:</strong> Extractive brief generation anchors strictly upon verbatim textual elements of authentic court records.</li>
+                    <li><i class="fa-solid fa-check-circle text-success"></i> <strong>Transparent Ratio Decidendi:</strong> Precedent match scores provide interpretable explanations regarding matched legal ontology concepts.</li>
+                    <li><i class="fa-solid fa-check-circle text-success"></i> <strong>Human-in-the-Loop Verification:</strong> Legal practitioners and litigants are explicitly advised to review original case texts via provided citations.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeEthicsModal()">I Acknowledge & Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Footer -->
+    <footer class="app-footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-gavel"></i> LexBrief AI
+                </div>
+                <p>AI-Based Court Case Summarization and Legal Research Assistant.</p>
+                <div class="meta-tag">Academic Capstone • Project ID: CSEAIML2026-P13</div>
+            </div>
+            <div class="footer-col">
+                <h4>System Capabilities</h4>
+                <ul>
+                    <li><a href="{{ url_for('summarize_page') }}">IRAC Structured Briefs</a></li>
+                    <li><a href="{{ url_for('summarize_page') }}">Key-Element Entity Extraction</a></li>
+                    <li><a href="{{ url_for('search_page') }}">Semantic Precedent Retrieval</a></li>
+                    <li><a href="{{ url_for('compare_page') }}">Side-by-Side Judicial Comparison</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Target User Groups</h4>
+                <ul>
+                    <li><i class="fa-solid fa-briefcase"></i> Legal Professionals & Advocates</li>
+                    <li><i class="fa-solid fa-user-tie"></i> Paralegals & Law Clerks</li>
+                    <li><i class="fa-solid fa-graduation-cap"></i> Law Students & Researchers</li>
+                    <li><i class="fa-solid fa-users"></i> Self-Represented Litigants</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Governance & Metrics</h4>
+                <ul>
+                    <li><a href="{{ url_for('evaluation_page') }}">ROUGE & P@K Benchmark</a></li>
+                    <li><a href="{{ url_for('disclaimer_page') }}">Scope of Use Policy</a></li>
+                    <li><span>Precision@1: 100% Benchmark</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container bottom-inner">
+                <span>&copy; 2026 LexBrief AI. CSE AIML Capstone Project CSEAIML2026-P13.</span>
+                <span>Powered by Hybrid BM25 & Semantic Dense Vector NLP.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

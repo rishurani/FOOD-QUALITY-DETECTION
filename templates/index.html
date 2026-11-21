@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | LexBrief AI - Legal Case Summarization & Research Assistant{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container hero-container">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>Project ID: {{ project_id }} • CSE AIML 2026</span>
+        </div>
+        <h1 class="hero-title">AI-Based Court Case Summarization & Legal Research Assistant</h1>
+        <p class="hero-subtitle">
+            An advanced Natural Language Processing system that condenses complex judicial judgments into concise, structured IRAC briefs, extracts critical legal facts, arguments, and rulings, and surfaces precedents using semantic conceptual search.
+        </p>
+
+        <!-- Quick Search Bar -->
+        <div class="hero-search-box">
+            <form action="{{ url_for('search_page') }}" method="GET" class="search-form">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" name="q" placeholder="Search precedents by legal question, principle or facts (e.g. 'duty of care in product liability', 'right to privacy')..." class="hero-search-input" required>
+                <button type="submit" class="btn btn-gold btn-search">
+                    <span>Retrieve Precedents</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            <div class="search-preset-pills">
+                <span class="preset-label">Try research queries:</span>
+                <a href="{{ url_for('search_page', q='right to privacy and government surveillance under fundamental rights') }}" class="preset-pill">Right to Privacy</a>
+                <a href="{{ url_for('search_page', q='duty of care owed by manufacturer to consumer without contract') }}" class="preset-pill">Manufacturer Duty of Care</a>
+                <a href="{{ url_for('search_page', q='remoteness of damages in breach of contract and loss of profits') }}" class="preset-pill">Contract Breach Damages</a>
+                <a href="{{ url_for('search_page', q='police torture in lockup and arrest guidelines under Article 21') }}" class="preset-pill">Custodial Arrest Safeguards</a>
+            </div>
+        </div>
+
+        <!-- System Stats Bar -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">{{ total_cases }}</div>
+                <div class="stat-label">Landmark Judgments Indexed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ domains|length }}</div>
+                <div class="stat-label">Legal Jurisdictions & Domains</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">74.2%</div>
+                <div class="stat-label">Avg. Text Compression</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Top-1 Precedent Precision (P@1)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container main-content-wrapper">
+    <!-- Primary Users Section (Explicitly from Project Brief) -->
+    <section class="section-block">
+        <div class="section-header text-center">
+            <div class="section-subtitle">Intended Audience & Personas</div>
+            <h2 class="section-title">Designed for Diverse Legal Practitioners & Litigants</h2>
+            <p class="section-desc">Empowering legal stakeholders with structured NLP intelligence, factual extraction, and rapid precedent discovery.</p>
+        </div>
+        
+        <div class="persona-grid">
+            <div class="persona-card">
+                <div class="persona-icon icon-blue"><i class="fa-solid fa-scale-balanced"></i></div>
+                <h3>Legal Advocates & Counsels</h3>
+                <p>Instantly generate FIRAC/IRAC structured briefs from 50+ page judgments. Extract ratio decidendi, procedural timelines, and counter-arguments for courtroom submissions.</p>
+                <div class="persona-feature"><i class="fa-solid fa-check"></i> Ratio decidendi isolation</div>
+            </div>
+            <div class="persona-card">
+                <div class="persona-icon icon-emerald"><i class="fa-solid fa-user-tie"></i></div>
+                <h3>Paralegals & Legal Clerks</h3>
+                <p>Automate element extraction including cited statutory sections, precedent cross-references, and procedural disposition summaries with export to PDF & Markdown.</p>
+                <div class="persona-feature"><i class="fa-solid fa-check"></i> Automated statute & citation extraction</div>
+            </div>
+            <div class="persona-card">
+                <div class="persona-icon icon-purple"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h3>Law Students & Academics</h3>
+                <p>Compare multiple judicial opinions side by side to study doctrinal evolution, analyze concurring vs. dissenting logic, and examine statutory interpretation.</p>
+                <div class="persona-feature"><i class="fa-solid fa-check"></i> Multi-case comparative analysis</div>
+            </div>
+            <div class="persona-card">
+                <div class="persona-icon icon-amber"><i class="fa-solid fa-users"></i></div>
+                <h3>Self-Represented Litigants</h3>
+                <p>Demystify opaque legal prose through plain-English executive summaries and key bullet takeaways without requiring deep background in legal Latin or jargon.</p>
+                <div class="persona-feature"><i class="fa-solid fa-check"></i> Plain-language key takeaways</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Functional Modules -->
+    <section class="section-block">
+        <div class="section-header">
+            <div class="section-subtitle">System Capabilities</div>
+            <h2 class="section-title">Four Core NLP Modules</h2>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-file-contract"></i></div>
+                <h3>1. Structured IRAC Summarization</h3>
+                <p>Condenses lengthy court transcripts into standardized <strong>Facts, Issues, Arguments, Reasoning (Ratio), and Ruling</strong> briefs using graph-based TextRank and legal salience priors.</p>
+                <a href="{{ url_for('summarize_page') }}" class="card-link">Launch Summarizer <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-tags"></i></div>
+                <h3>2. Key-Element & Entity Extraction</h3>
+                <p>Automatically isolates bench composition, decision outcome badges (Allowed/Dismissed), cited constitutional articles, statutory provisions, and referenced case laws.</p>
+                <a href="{{ url_for('summarize_page') }}" class="card-link">Inspect Extractor <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                <h3>3. Semantic Precedent Engine</h3>
+                <p>Overcomes the limitations of exact-keyword lookup using dense legal ontology embeddings and query expansion, finding cases that share similar judicial logic.</p>
+                <a href="{{ url_for('search_page') }}" class="card-link">Explore Search <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-columns"></i></div>
+                <h3>4. Side-by-Side Case Comparison</h3>
+                <p>Select multiple related judgments to inspect facts, issues, and dispositions side by side, computing doctrinal concordance or distinguishing factors.</p>
+                <a href="{{ url_for('compare_page') }}" class="card-link">Compare Cases <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Landmark Case Law Repository -->
+    <section class="section-block">
+        <div class="section-header flex-between">
+            <div>
+                <div class="section-subtitle">Case Database</div>
+                <h2 class="section-title">Representative Landmark Case Law</h2>
+                <p class="section-desc">Indexed judgments ready for instantaneous summarization, analysis, and cross-comparison.</p>
+            </div>
+            <a href="{{ url_for('search_page') }}" class="btn btn-outline-primary">Browse All Judgments <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="case-card-grid">
+            {% for case in cases[:6] %}
+            <div class="case-preview-card">
+                <div class="case-card-header">
+                    <span class="domain-tag">{{ case.domain }}</span>
+                    <span class="outcome-badge outcome-{{ case.outcome.badge }}">{{ case.outcome.status }}</span>
+                </div>
+                <h4 class="case-card-title">{{ case.title }}</h4>
+                <div class="case-card-citation"><i class="fa-solid fa-bookmark"></i> {{ case.citation }}</div>
+                <div class="case-card-court"><i class="fa-solid fa-building-columns"></i> {{ case.court }} • {{ case.date }}</div>
+                
+                <p class="case-card-ratio">
+                    <strong>Ratio Decidendi:</strong> {{ case.ratio_decidendi[:150] }}...
+                </p>
+
+                <div class="case-card-footer">
+                    <a href="{{ url_for('summarize_page', case_id=case.id) }}" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-file-lines"></i> View Structured Brief
+                    </a>
+                    <a href="{{ url_for('compare_page', case_id=case.id) }}" class="btn btn-sm btn-outline-secondary" title="Compare with another case">
+                        <i class="fa-solid fa-columns"></i> Compare
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

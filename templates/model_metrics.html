@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+
+{% block title %}Model Performance & Metrics - FreshVision AI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h1 class="page-title">Model Evaluation &amp; Performance</h1>
+            <p class="page-subtitle">
+                Empirical performance metrics calculated on held-out test datasets using MobileNetV2 Transfer Learning.
+            </p>
+        </div>
+        <div>
+            <button class="btn btn-secondary btn-sm" id="reloadMetricsBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                <span>Reload Metrics</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="metrics-banner">
+        <h2 class="metrics-banner-title">MobileNetV2 Deep Feature Extractor</h2>
+        <p class="metrics-banner-desc">
+            Trained with frozen pre-trained ImageNet convolutional backbones, followed by Global Average Pooling, Dropout regularization (0.3), and dense classification. Evaluated on strictly separated held-out test imagery.
+        </p>
+    </div>
+
+    <!-- State 1: Not Evaluated State -->
+    <div class="card" id="notEvaluatedCard" style="display: none; text-align: center; padding: 4rem 2rem;">
+        <div class="empty-icon" style="background-color: var(--uncertain-bg); color: var(--uncertain-color); margin: 0 auto 1.5rem auto;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+        </div>
+        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem;">Not Evaluated Yet</h3>
+        <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto 2rem auto; font-size: 1rem; line-height: 1.6;">
+            Held-out test metrics have not been generated yet. Real performance statistics will be automatically calculated when you execute the model training or evaluation pipeline.
+        </p>
+        <div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; max-width: 480px; margin: 0 auto 2rem auto; text-align: left; font-family: monospace; font-size: 0.9rem;">
+            <div style="color: var(--text-muted); margin-bottom: 0.5rem;"># Step 1: Run model training pipeline</div>
+            <div style="color: var(--primary); font-weight: 700;">python train_model.py</div>
+            <div style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 0.5rem;"># Or evaluate an existing model checkpoint</div>
+            <div style="color: var(--primary); font-weight: 700;">python evaluate_model.py</div>
+        </div>
+        <a href="{{ url_for('main.about') }}" class="btn btn-secondary">Read Model Architecture Documentation</a>
+    </div>
+
+    <!-- State 2: Evaluated Metrics Display -->
+    <div id="evaluatedContainer" style="display: none;">
+        <!-- Test Set KPI Grid -->
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--secondary);"></span>
+            Held-Out Test Set Metrics (Unseen Test Data)
+        </h3>
+        
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Test Accuracy</div>
+                <div class="kpi-val" id="testAcc">--%</div>
+                <div class="kpi-footnote">Overall correct predictions</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Precision (Macro)</div>
+                <div class="kpi-val" id="testPrecision">--%</div>
+                <div class="kpi-footnote">Low false positive rate</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Recall (Sensitivity)</div>
+                <div class="kpi-val" id="testRecall">--%</div>
+                <div class="kpi-footnote">Spoiled detection rate</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">F1-Score (Harmonic)</div>
+                <div class="kpi-val" id="testF1">--%</div>
+                <div class="kpi-footnote">Balanced precision &amp; recall</div>
+            </div>
+        </div>
+
+        <!-- Comparative Metrics & Confusion Matrix -->
+        <div class="charts-grid">
+            <!-- Training vs Validation vs Test Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Training vs Validation vs Test Split</h3>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Evaluation Split</th>
+                            <th>Sample Count</th>
+                            <th>Accuracy</th>
+                            <th>Loss Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="splitsTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.5;">
+                    <em>Note:</em> Generalization gap between training and validation accuracy is minimized through Dropout (0.3) and Data Augmentation on training tensors.
+                </div>
+            </div>
+
+            <!-- Confusion Matrix Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Confusion Matrix (Held-out Test)</h3>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">True vs Predicted</span>
+                </div>
+                <div style="padding: 1rem 0;">
+                    <table class="confusion-matrix-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th style="color: var(--primary); font-size: 0.85rem;">Pred Fresh</th>
+                                <th style="color: var(--spoiled-color); font-size: 0.85rem;">Pred Spoiled</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th style="color: var(--primary); font-size: 0.85rem; text-align: right; padding-right: 0.75rem;">Actual Fresh</th>
+                                <td class="cm-cell cm-tp" id="cmTP" title="True Fresh">--</td>
+                                <td class="cm-cell cm-fn" id="cmFN" title="False Spoiled">--</td>
+                            </tr>
+                            <tr>
+                                <th style="color: var(--spoiled-color); font-size: 0.85rem; text-align: right; padding-right: 0.75rem;">Actual Spoiled</th>
+                                <td class="cm-cell cm-fp" id="cmFP" title="False Fresh">--</td>
+                                <td class="cm-cell cm-tn" id="cmTN" title="True Spoiled">--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display: flex; justify-content: space-around; font-size: 0.8rem; color: var(--text-secondary); border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                    <span><strong id="cmFreshCount">--</strong> Fresh Specimens</span>
+                    <span><strong id="cmSpoiledCount">--</strong> Spoiled Specimens</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Curves Chart Card -->
+        <div class="card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">Training &amp; Validation Curves</h3>
+                    <p style="font-size: 0.825rem; color: var(--text-muted); margin-top: 0.2rem;">Epoch-by-epoch loss convergence and accuracy trajectory</p>
+                </div>
+            </div>
+            <div class="charts-grid" style="margin-bottom: 0;">
+                <div class="chart-wrapper">
+                    <canvas id="accuracyCurveChart"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="lossCurveChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const notEvaluatedCard = document.getElementById('notEvaluatedCard');
+    const evaluatedContainer = document.getElementById('evaluatedContainer');
+    const reloadBtn = document.getElementById('reloadMetricsBtn');
+
+    let accChart = null;
+    let lossChart = null;
+
+    async function fetchMetrics() {
+        try {
+            const res = await fetch('/api/model/metrics');
+            const data = await res.json();
+
+            if (!data.evaluated || !data.metrics) {
+                notEvaluatedCard.style.display = 'block';
+                evaluatedContainer.style.display = 'none';
+                return;
+            }
+
+            notEvaluatedCard.style.display = 'none';
+            evaluatedContainer.style.display = 'block';
+
+            const m = data.metrics;
+
+            // Update KPI cards
+            document.getElementById('testAcc').textContent = (m.test_accuracy * 100).toFixed(1) + '%';
+            document.getElementById('testPrecision').textContent = (m.precision * 100).toFixed(1) + '%';
+            document.getElementById('testRecall').textContent = (m.recall * 100).toFixed(1) + '%';
+            document.getElementById('testF1').textContent = (m.f1_score * 100).toFixed(1) + '%';
+
+            // Splits table
+            const tbody = document.getElementById('splitsTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td><strong>Training Set</strong></td>
+                    <td>${m.splits?.train_samples || '--'} images</td>
+                    <td>${m.train_accuracy ? (m.train_accuracy * 100).toFixed(1) + '%' : '--'}</td>
+                    <td>${m.train_loss ? m.train_loss.toFixed(4) : '--'}</td>
+                </tr>
+                <tr>
+                    <td><strong>Validation Set</strong></td>
+                    <td>${m.splits?.val_samples || '--'} images</td>
+                    <td>${m.val_accuracy ? (m.val_accuracy * 100).toFixed(1) + '%' : '--'}</td>
+                    <td>${m.val_loss ? m.val_loss.toFixed(4) : '--'}</td>
+                </tr>
+                <tr style="background: var(--bg-card-hover);">
+                    <td><strong>Held-Out Test Set</strong></td>
+                    <td>${m.splits?.test_samples || '--'} images</td>
+                    <td><strong style="color: var(--primary);">${(m.test_accuracy * 100).toFixed(1)}%</strong></td>
+                    <td>${m.test_loss ? m.test_loss.toFixed(4) : '--'}</td>
+                </tr>
+            `;
+
+            // Confusion matrix
+            if (m.confusion_matrix) {
+                const cm = m.confusion_matrix;
+                document.getElementById('cmTP').textContent = cm.true_fresh ?? '--';
+                document.getElementById('cmFN').textContent = cm.false_spoiled ?? '--';
+                document.getElementById('cmFP').textContent = cm.false_fresh ?? '--';
+                document.getElementById('cmTN').textContent = cm.true_spoiled ?? '--';
+
+                const totalFresh = (cm.true_fresh || 0) + (cm.false_spoiled || 0);
+                const totalSpoiled = (cm.true_spoiled || 0) + (cm.false_fresh || 0);
+                document.getElementById('cmFreshCount').textContent = totalFresh;
+                document.getElementById('cmSpoiledCount').textContent = totalSpoiled;
+            }
+
+            // Learning curves
+            if (m.history && m.history.epochs && m.history.epochs.length > 0) {
+                renderCurves(m.history);
+            }
+
+        } catch (err) {
+            console.error('Failed to load metrics:', err);
+            notEvaluatedCard.style.display = 'block';
+            evaluatedContainer.style.display = 'none';
+        }
+    }
+
+    function renderCurves(history) {
+        const labels = history.epochs.map(e => `Epoch ${e}`);
+
+        if (accChart) accChart.destroy();
+        if (lossChart) lossChart.destroy();
+
+        const ctxAcc = document.getElementById('accuracyCurveChart').getContext('2d');
+        accChart = new Chart(ctxAcc, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Training Accuracy',
+                        data: history.accuracy,
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'Validation Accuracy',
+                        data: history.val_accuracy,
+                        borderColor: '#166534',
+                        backgroundColor: 'rgba(22, 101, 52, 0.1)',
+                        borderDash: [5, 5],
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Model Accuracy Trajectory' },
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: { min: 0, max: 1.0, ticks: { callback: v => (v * 100) + '%' } }
+                }
+            }
+        });
+
+        const ctxLoss = document.getElementById('lossCurveChart').getContext('2d');
+        lossChart = new Chart(ctxLoss, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Training Loss',
+                        data: history.loss,
+                        borderColor: '#F59E0B',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: 'Validation Loss',
+                        data: history.val_loss,
+                        borderColor: '#EF4444',
+                        borderDash: [5, 5],
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Model Cross-Entropy Loss' },
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    reloadBtn.addEventListener('click', () => {
+        fetchMetrics();
+        if (window.showToast) window.showToast('Refreshing evaluation metrics...');
+    });
+
+    fetchMetrics();
+});
+</script>
+{% endblock %}

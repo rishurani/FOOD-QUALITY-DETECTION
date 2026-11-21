@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Semantic Precedent Search | LexBrief AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="page-title-row">
+            <div>
+                <span class="badge-accent"><i class="fa-solid fa-brain"></i> Module 3</span>
+                <h1 class="page-title">Semantic Precedent Search & Retrieval Engine</h1>
+                <p class="page-subtitle">Retrieve relevant judicial precedents using natural language questions and conceptual legal reasoning, going beyond exact keyword matching.</p>
+            </div>
+            <div class="page-actions">
+                <a href="{{ url_for('compare_page') }}" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-columns"></i> Side-by-Side Comparison
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container main-content-wrapper">
+    <!-- Search Query Bar & Filters Card -->
+    <div class="card search-control-card">
+        <form action="{{ url_for('search_page') }}" method="GET" class="search-form-expanded">
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-main-icon"></i>
+                <input type="text" name="q" id="searchQuery" class="search-field" placeholder="Enter research query (e.g. 'damages for breach of commercial contract when profits are lost', 'right to privacy and state surveillance')..." value="{{ query }}" required>
+                {% if query %}
+                <a href="{{ url_for('search_page') }}" class="search-clear-btn" title="Clear query">&times;</a>
+                {% endif %}
+                <button type="submit" class="btn btn-gold btn-search-lg">
+                    <i class="fa-solid fa-brain"></i> <span>Search Precedents</span>
+                </button>
+            </div>
+
+            <div class="search-filters-row">
+                <div class="filter-item">
+                    <label for="domainFilter"><i class="fa-solid fa-filter"></i> Legal Domain:</label>
+                    <select name="domain" id="domainFilter" class="form-control-sm" onchange="this.form.submit()">
+                        <option value="all" {% if domain == 'all' %}selected{% endif %}>All Domains (Universal)</option>
+                        {% for d in domains %}
+                        <option value="{{ d }}" {% if domain == d %}selected{% endif %}>{{ d }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="search-stats-text">
+                    {% if query %}
+                    <span>Found <strong>{{ results|length }}</strong> relevant landmark precedent(s) for <em>"{{ query }}"</em></span>
+                    {% else %}
+                    <span>Hybrid BM25 Keyword + Semantic Concept Retrieval Engine Active</span>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+
+        <!-- Clickable Sample Research Queries -->
+        <div class="preset-queries-box">
+            <span class="preset-title"><i class="fa-solid fa-lightbulb"></i> Recommended Benchmark Research Queries:</span>
+            <div class="preset-links-grid">
+                <a href="{{ url_for('search_page', q='right to privacy and government surveillance under fundamental rights', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Privacy & Surveillance
+                </a>
+                <a href="{{ url_for('search_page', q='duty of care owed by manufacturer to consumer without contract', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Manufacturer Duty of Care
+                </a>
+                <a href="{{ url_for('search_page', q='remoteness of damages in breach of contract and loss of profits', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Contract Remoteness & Lost Profits
+                </a>
+                <a href="{{ url_for('search_page', q='free speech on social media and offensive online posts section 66A', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Online Speech & Section 66A
+                </a>
+                <a href="{{ url_for('search_page', q='police torture in lockup and arrest guidelines under Article 21', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Custodial Torture & Arrest Safeguards
+                </a>
+                <a href="{{ url_for('search_page', q='patent evergreening and therapeutic efficacy threshold section 3d', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Pharma Patent Evergreening
+                </a>
+                <a href="{{ url_for('search_page', q='absolute liability for hazardous chemical industries toxic gas leak', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Absolute Liability & Toxic Hazards
+                </a>
+                <a href="{{ url_for('search_page', q='medical negligence criminal prosecution under 304A bolam test', domain='all') }}" class="query-chip">
+                    <i class="fa-solid fa-magnifying-glass"></i> Medical Negligence & Bolam Test
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-container">
+        {% if results %}
+        <div class="results-list">
+            {% for r in results %}
+            <div class="card result-card">
+                <div class="result-header">
+                    <div class="result-title-area">
+                        <span class="domain-tag">{{ r.domain }}</span>
+                        <span class="outcome-badge outcome-{{ r.outcome.badge }}">{{ r.outcome.status }}</span>
+                        <h3 class="result-title">
+                            <a href="{{ url_for('summarize_page', case_id=r.case_id) }}">{{ r.title }}</a>
+                        </h3>
+                        <div class="result-citation">
+                            <span><i class="fa-solid fa-bookmark"></i> {{ r.citation }}</span> • 
+                            <span><i class="fa-solid fa-building-columns"></i> {{ r.court }}</span> • 
+                            <span><i class="fa-solid fa-calendar"></i> {{ r.date }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Relevance Score Badge -->
+                    <div class="score-badge-wrapper">
+                        <div class="score-circle">
+                            <span class="score-num">{{ r.score }}%</span>
+                            <span class="score-text">Relevance</span>
+                        </div>
+                        <div class="score-breakdown">
+                            <span title="Semantic dense vector similarity">Sem: {{ r.semantic_score }}%</span>
+                            <span title="BM25 keyword match">BM25: {{ r.keyword_score }}%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanation Box -->
+                <div class="relevance-explanation-box">
+                    <div class="explanation-icon"><i class="fa-solid fa-circle-info"></i></div>
+                    <div class="explanation-text">
+                        <strong>Precedent Match Explanation:</strong> {{ r.relevance_explanation }}
+                    </div>
+                </div>
+
+                <!-- Matched Concepts -->
+                {% if r.matched_concepts %}
+                <div class="matched-concepts-row">
+                    <span class="concepts-label">Matching Legal Concepts:</span>
+                    {% for c in r.matched_concepts %}
+                    <span class="concept-tag"><i class="fa-solid fa-tag"></i> {{ c }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Ratio Decidendi -->
+                <div class="result-ratio">
+                    <strong>Ratio Decidendi:</strong> {{ r.ratio_decidendi }}
+                </div>
+
+                <!-- Highlighted Excerpt -->
+                {% if r.relevant_excerpt %}
+                <div class="result-excerpt">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <span>{{ r.relevant_excerpt }}</span>
+                </div>
+                {% endif %}
+
+                <!-- Action Footer -->
+                <div class="result-footer">
+                    <a href="{{ url_for('summarize_page', case_id=r.case_id) }}" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-file-lines"></i> Open Structured Brief
+                    </a>
+                    <a href="{{ url_for('compare_page', case_id=r.case_id) }}" class="btn btn-sm btn-outline-secondary">
+                        <i class="fa-solid fa-columns"></i> Compare with Another Case
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% elif query %}
+        <div class="card empty-card">
+            <div class="empty-icon"><i class="fa-solid fa-folder-open"></i></div>
+            <h3>No Direct Precedents Found</h3>
+            <p>Try rephrasing your research question with broader legal terms or selecting "All Domains" in the filter above.</p>
+        </div>
+        {% else %}
+        <div class="card empty-card">
+            <div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>Ready for Natural Language Precedent Lookup</h3>
+            <p>Enter a query above or click on one of the recommended benchmark queries to test semantic search.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

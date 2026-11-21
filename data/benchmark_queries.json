@@ -1,0 +1,72 @@
+[
+  {
+    "query_id": "Q1",
+    "query": "right to privacy and government surveillance under fundamental rights",
+    "domain": "Constitutional Law",
+    "relevant_cases": ["puttaswamy-2017"],
+    "description": "Information privacy, surveillance and Article 21 fundamental rights"
+  },
+  {
+    "query_id": "Q2",
+    "query": "duty of care owed by manufacturer to consumer without contract",
+    "domain": "Tort & Negligence Law",
+    "relevant_cases": ["donoghue-1932"],
+    "description": "Product liability and neighbor principle in tort of negligence"
+  },
+  {
+    "query_id": "Q3",
+    "query": "remoteness of damages in breach of contract and loss of profits",
+    "domain": "Contract & Commercial Law",
+    "relevant_cases": ["hadley-1854"],
+    "description": "Foreseeability and contemplation of parties for breach of contract damages"
+  },
+  {
+    "query_id": "Q4",
+    "query": "free speech on social media and offensive online posts section 66A",
+    "domain": "Constitutional Law",
+    "relevant_cases": ["shreya-singhal-2015"],
+    "description": "Vagueness of penal statutes and online freedom of speech Article 19(1)(a)"
+  },
+  {
+    "query_id": "Q5",
+    "query": "custodial interrogation rights and warnings before police questioning",
+    "domain": "Criminal Law & Procedure",
+    "relevant_cases": ["miranda-1966", "dk-basu-1997"],
+    "description": "Privilege against self-incrimination and custodial procedural rights"
+  },
+  {
+    "query_id": "Q6",
+    "query": "police torture in lockup and arrest guidelines under Article 21",
+    "domain": "Criminal Law & Procedure",
+    "relevant_cases": ["dk-basu-1997", "miranda-1966"],
+    "description": "Arrest guidelines and safeguards against custodial brutality"
+  },
+  {
+    "query_id": "Q7",
+    "query": "patent evergreening and therapeutic efficacy threshold section 3d",
+    "domain": "Intellectual Property Rights",
+    "relevant_cases": ["novartis-2013"],
+    "description": "Strict patentability standards for pharmaceuticals under Section 3(d)"
+  },
+  {
+    "query_id": "Q8",
+    "query": "parliament power to amend constitution and basic structure doctrine",
+    "domain": "Constitutional Law",
+    "relevant_cases": ["kesavananda-1973"],
+    "description": "Inherent limitations on constitutional amending power under Article 368"
+  },
+  {
+    "query_id": "Q9",
+    "query": "absolute liability for hazardous chemical industries toxic gas leak",
+    "domain": "Environmental Law",
+    "relevant_cases": ["mc-mehta-1987"],
+    "description": "Enterprise liability for hazardous activities beyond Rylands v. Fletcher"
+  },
+  {
+    "query_id": "Q10",
+    "query": "medical negligence criminal prosecution under 304A bolam test",
+    "domain": "Tort & Negligence Law",
+    "relevant_cases": ["jacob-mathew-2005", "donoghue-1932"],
+    "description": "Gross criminal negligence vs civil negligence for medical practitioners"
+  }
+]

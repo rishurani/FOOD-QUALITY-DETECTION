@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block title %}Summarizer & Key-Element Extractor | LexBrief AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="page-title-row">
+            <div>
+                <span class="badge-accent"><i class="fa-solid fa-file-contract"></i> Module 1 & 2</span>
+                <h1 class="page-title">Court Judgment Summarization & Key-Element Extractor</h1>
+                <p class="page-subtitle">Condense multi-page judgments into structured IRAC briefs (Facts, Issues, Arguments, Ratio, Ruling) with automated entity extraction.</p>
+            </div>
+            <div class="page-actions">
+                <a href="{{ url_for('compare_page') }}" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-columns"></i> Go to Case Comparison
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container main-content-wrapper">
+    <div class="summarizer-grid">
+        <!-- Left Panel: Input & Controls -->
+        <div class="summarizer-input-panel">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Input Judgment Data</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Preset Selection -->
+                    <div class="form-group">
+                        <label for="presetSelect"><strong>Load Pre-Indexed Landmark Judgment:</strong></label>
+                        <select id="presetSelect" class="form-control" onchange="loadPresetCase(this.value)">
+                            <option value="">-- Or choose a representative landmark case --</option>
+                            {% for c in cases %}
+                            <option value="{{ c.id }}" {% if selected_case and selected_case.id == c.id %}selected{% endif %}>
+                                {{ c.title }} ({{ c.citation }}) - [{{ c.domain }}]
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- File Upload or Direct Paste -->
+                    <div class="form-group">
+                        <div class="upload-area" id="dropArea" onclick="document.getElementById('fileInput').click()">
+                            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                            <p><strong>Click to upload judgment file (.txt)</strong> or drag & drop</p>
+                            <span class="upload-hint">Supports plaintext and transcripts</span>
+                            <input type="file" id="fileInput" accept=".txt,.json" style="display: none;" onchange="handleFileUpload(event)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="judgmentText"><strong>Judgment Text:</strong></label>
+                        <textarea id="judgmentText" class="form-control code-text" rows="11" placeholder="Paste full court judgment or case file text here...">{% if selected_case %}{{ selected_case.text }}{% endif %}</textarea>
+                    </div>
+
+                    <!-- Customization Parameters -->
+                    <div class="controls-row">
+                        <div class="form-group flex-1">
+                            <label for="summaryMode"><strong>Brief Format:</strong></label>
+                            <select id="summaryMode" class="form-control">
+                                <option value="structured" selected>IRAC / FIRAC Structured Brief</option>
+                                <option value="executive">Executive Synthesis (Narrative)</option>
+                                <option value="bullet">High-Impact Key Takeaways</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="summaryFocus"><strong>Focus Area:</strong></label>
+                            <select id="summaryFocus" class="form-control">
+                                <option value="all" selected>Balanced All Elements</option>
+                                <option value="reasoning">Ratio Decidendi / Reasoning Focus</option>
+                                <option value="ruling">Ruling & Operative Orders Focus</option>
+                                <option value="facts">Factual Matrix Focus</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="flex-between">
+                            <label for="targetSentences"><strong>Target Length: <span id="sentenceCountLabel">8 sentences</span></strong></label>
+                            <span class="text-muted text-sm">Compression Level</span>
+                        </div>
+                        <input type="range" id="targetSentences" min="4" max="15" value="8" class="form-range" oninput="document.getElementById('sentenceCountLabel').innerText = this.value + ' sentences'">
+                    </div>
+
+                    <button id="btnSummarize" class="btn btn-primary btn-block btn-lg" onclick="triggerSummarization()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Structured Brief & Extract Elements
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Generated Brief & Extraction Results -->
+        <div class="summarizer-output-panel">
+            <!-- Loading Indicator -->
+            <div id="loadingState" class="card loading-card" style="display: none;">
+                <div class="spinner"></div>
+                <h4>Processing Judgment with Legal NLP Engine...</h4>
+                <p>Splitting discourse zones, building PageRank sentence graph, and extracting statutory citations.</p>
+            </div>
+
+            <!-- Empty Placeholder -->
+            <div id="emptyState" class="card empty-card" {% if selected_case %}style="display: none;"{% endif %}>
+                <div class="empty-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                <h3>No Brief Generated Yet</h3>
+                <p>Select a landmark judgment from the dropdown on the left or paste your own court text, then click "Generate Structured Brief".</p>
+            </div>
+
+            <!-- Active Results Card -->
+            <div id="resultsCard" class="card results-card" {% if not selected_case %}style="display: none;"{% endif %}>
+                <!-- Case Header Card -->
+                <div class="brief-meta-header">
+                    <div class="meta-title-row">
+                        <div>
+                            <span id="resDomain" class="domain-tag">Constitutional Law</span>
+                            <span id="resOutcome" class="outcome-badge outcome-success">Allowed</span>
+                            <h2 id="resTitle" class="brief-case-title">Case Title</h2>
+                            <div class="brief-submeta">
+                                <span id="resCitation"><i class="fa-solid fa-bookmark"></i> Citation</span> • 
+                                <span id="resCourt"><i class="fa-solid fa-building-columns"></i> Court</span> • 
+                                <span id="resDate"><i class="fa-solid fa-calendar"></i> Date</span>
+                            </div>
+                        </div>
+                        <div class="export-btn-group">
+                            <button class="btn btn-sm btn-outline-secondary" onclick="copyBriefText()" title="Copy to clipboard">
+                                <i class="fa-solid fa-copy"></i> Copy
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="exportBrief('markdown')" title="Export Markdown">
+                                <i class="fa-solid fa-file-arrow-down"></i> .MD
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="exportBrief('json')" title="Export JSON">
+                                <i class="fa-solid fa-code"></i> .JSON
+                            </button>
+                            <button class="btn btn-sm btn-gold" onclick="window.print()" title="Print / PDF">
+                                <i class="fa-solid fa-print"></i> Print
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Compression Metrics Pill Bar -->
+                    <div class="metrics-pill-bar">
+                        <div class="metric-pill">
+                            <span class="pill-label">Original:</span>
+                            <strong id="statOriginalWords">0</strong> words
+                        </div>
+                        <div class="metric-pill">
+                            <span class="pill-label">Brief:</span>
+                            <strong id="statSummaryWords">0</strong> words
+                        </div>
+                        <div class="metric-pill pill-success">
+                            <span class="pill-label">Compression:</span>
+                            <strong id="statCompression">0%</strong> reduction
+                        </div>
+                        <div class="metric-pill">
+                            <span class="pill-label">Sentences:</span>
+                            <strong id="statSentences">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structured IRAC Navigation Tabs -->
+                <div class="brief-tabs">
+                    <button class="tab-btn active" onclick="switchTab('tabIrac')"><i class="fa-solid fa-table-list"></i> Structured IRAC Brief</button>
+                    <button class="tab-btn" onclick="switchTab('tabExecutive')"><i class="fa-solid fa-align-left"></i> Executive Synthesis</button>
+                    <button class="tab-btn" onclick="switchTab('tabEntities')"><i class="fa-solid fa-tags"></i> Extracted Statutes & Precedents</button>
+                    <button class="tab-btn" onclick="switchTab('tabTakeaways')"><i class="fa-solid fa-list-check"></i> Key Takeaways</button>
+                </div>
+
+                <!-- Tab 1: IRAC Brief -->
+                <div id="tabIrac" class="tab-pane active">
+                    <!-- Facts -->
+                    <div class="irac-section">
+                        <div class="irac-label label-facts"><i class="fa-solid fa-book-open"></i> I. Case Facts & Factual Matrix</div>
+                        <div id="briefFacts" class="irac-content"></div>
+                    </div>
+
+                    <!-- Issues -->
+                    <div class="irac-section">
+                        <div class="irac-label label-issues"><i class="fa-solid fa-circle-question"></i> II. Legal Issues & Questions Framed</div>
+                        <div id="briefIssues" class="irac-content"></div>
+                    </div>
+
+                    <!-- Arguments -->
+                    <div class="irac-section">
+                        <div class="irac-label label-args"><i class="fa-solid fa-comments"></i> III. Arguments Presented by Parties</div>
+                        <div id="briefArguments" class="irac-content"></div>
+                    </div>
+
+                    <!-- Reasoning -->
+                    <div class="irac-section">
+                        <div class="irac-label label-reasoning"><i class="fa-solid fa-brain"></i> IV. Legal Reasoning & Ratio Decidendi</div>
+                        <div id="briefReasoning" class="irac-content"></div>
+                    </div>
+
+                    <!-- Ruling -->
+                    <div class="irac-section">
+                        <div class="irac-label label-ruling"><i class="fa-solid fa-gavel"></i> V. Final Holding, Ruling & Disposition</div>
+                        <div id="briefRuling" class="irac-content"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Executive Summary -->
+                <div id="tabExecutive" class="tab-pane">
+                    <div class="executive-box">
+                        <h4><i class="fa-solid fa-scroll"></i> Executive Synthesis</h4>
+                        <p id="briefExecutiveText" class="exec-text"></p>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Extracted Statutes & Precedents -->
+                <div id="tabEntities" class="tab-pane">
+                    <div class="entities-grid">
+                        <div class="entity-group">
+                            <h4><i class="fa-solid fa-scale-balanced"></i> Cited Constitutional & Statutory Provisions:</h4>
+                            <div id="listStatutes" class="tags-container"></div>
+                        </div>
+                        <div class="entity-group">
+                            <h4><i class="fa-solid fa-landmark"></i> Cited Precedents & Case Authorities:</h4>
+                            <div id="listPrecedents" class="tags-container"></div>
+                        </div>
+                        <div class="entity-group">
+                            <h4><i class="fa-solid fa-user-group"></i> Judicial Bench / Coram:</h4>
+                            <div id="listBench" class="tags-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Key Takeaways -->
+                <div id="tabTakeaways" class="tab-pane">
+                    <div class="takeaways-box">
+                        <h4><i class="fa-solid fa-bolt"></i> High-Impact Takeaways for Legal Research</h4>
+                        <ul id="listTakeaways" class="takeaways-list"></ul>
+                    </div>
+                </div>
+
+                <!-- Bottom Disclaimer -->
+                <div class="card-footer-notice">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span><strong>Research Disclaimer:</strong> This brief is generated by LexBrief AI. Outputs should be verified against the official law report.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    {% if selected_case %}
+    triggerSummarization();
+    {% endif %}
+});
+</script>
+{% endblock %}

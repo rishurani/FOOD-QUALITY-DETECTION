@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Analysis History - FreshVision AI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h1 class="page-title">Inspection Audit History</h1>
+            <p class="page-subtitle">Search, filter, and review historical food quality evaluations recorded in the database.</p>
+        </div>
+        <div>
+            <button class="btn btn-outline-danger btn-sm" id="clearAllHistoryBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                <span>Clear All Records</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="filter-toolbar">
+        <div class="search-input-wrap">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by filename, prediction, or description...">
+        </div>
+
+        <div class="filter-group">
+            <button class="filter-btn active" data-category="all">All Records</button>
+            <button class="filter-btn" data-category="fresh">Fresh Only</button>
+            <button class="filter-btn" data-category="spoiled">Spoiled Only</button>
+            <button class="filter-btn" data-category="uncertain">Uncertain (&lt; 65%)</button>
+        </div>
+
+        <div>
+            <select id="sortSelect" class="sort-select">
+                <option value="newest">Sort: Newest First</option>
+                <option value="oldest">Sort: Oldest First</option>
+                <option value="confidence_desc">Sort: Highest Confidence</option>
+                <option value="confidence_asc">Sort: Lowest Confidence</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- History Cards Grid -->
+    <div class="history-grid" id="historyGrid">
+        <!-- Rendered via JavaScript -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">
+            Loading analysis history...
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state card" id="historyEmptyState" style="display: none;">
+        <div class="empty-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+        </div>
+        <h3 class="empty-title">No Matching Records Found</h3>
+        <p class="empty-desc">
+            No analysis records match your current search query or category filters. Try adjusting your search term or upload a new image.
+        </p>
+        <a href="{{ url_for('main.analyzer') }}" class="btn btn-primary">
+            Analyze New Image
+        </a>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination" id="paginationControls" style="display: none;">
+        <button class="page-btn" id="prevPageBtn">&laquo; Previous</button>
+        <span id="pageIndicator" style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); padding: 0 0.5rem;">
+            Page 1 of 1
+        </span>
+        <button class="page-btn" id="nextPageBtn">Next &raquo;</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}About Project - FreshVision AI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">Project Documentation &amp; Technical Architecture</h1>
+        <p class="page-subtitle">
+            Comprehensive documentation of the FreshVision AI deep learning food quality classification system.
+        </p>
+    </div>
+
+    <div class="about-grid">
+        <!-- Sidebar Navigation -->
+        <aside class="about-nav">
+            <a href="#problem-statement" class="about-nav-link active">1. Problem Statement</a>
+            <a href="#objectives" class="about-nav-link">2. Project Objectives</a>
+            <a href="#architecture" class="about-nav-link">3. Transfer Learning</a>
+            <a href="#preprocessing" class="about-nav-link">4. Preprocessing Pipeline</a>
+            <a href="#dataset" class="about-nav-link">5. Dataset Preparation</a>
+            <a href="#evaluation" class="about-nav-link">6. Evaluation &amp; Metrics</a>
+            <a href="#limitations" class="about-nav-link">7. Limitations &amp; Ethics</a>
+            <a href="#future" class="about-nav-link">8. Future Enhancements</a>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="about-content">
+            <!-- 1. Problem Statement -->
+            <section id="problem-statement">
+                <h2>1. Problem Statement</h2>
+                <p>
+                    Post-harvest food loss represents one of the greatest economic and environmental challenges in modern agriculture and food supply chains. According to the United Nations Food and Agriculture Organization (FAO), approximately one-third of all food produced for human consumption is lost or wasted globally, with fruits and vegetables experiencing the highest wastage rates (up to 45%).
+                </p>
+                <p>
+                    Traditional food quality inspection relies heavily on manual human grading, which suffers from:
+                </p>
+                <ul>
+                    <li><strong>Subjectivity:</strong> Human visual grading varies significantly across inspectors, shifts, and fatigue levels.</li>
+                    <li><strong>Scalability bottlenecks:</strong> Manual examination cannot keep pace with high-throughput distribution hubs.</li>
+                    <li><strong>Cross-contamination:</strong> Repeated physical handling can spread post-harvest mold and microbial pathogens.</li>
+                </ul>
+                <p>
+                    Computer vision and deep convolutional neural networks offer an automated, non-invasive, objective solution to rapidly triage produce based on high-resolution surface patterns.
+                </p>
+            </section>
+
+            <!-- 2. Project Objectives -->
+            <section id="objectives">
+                <h2>2. Project Objectives</h2>
+                <p>FreshVision AI was designed with the following core engineering goals:</p>
+                <ul>
+                    <li><strong>End-to-End System Integration:</strong> Combine modern front-end design, a secure Python/Flask REST API, relational SQLite ORM persistence, and deep learning inference.</li>
+                    <li><strong>Transfer Learning Implementation:</strong> Adapt a pre-trained MobileNetV2 architecture with custom classification heads for binary visual quality categorization (Fresh vs. Spoiled).</li>
+                    <li><strong>Calibrated Uncertainty Handling:</strong> Prevent false confidence by introducing a certainty threshold (65%) that flags ambiguous imagery for manual review.</li>
+                    <li><strong>Real-Time Analytics &amp; Auditing:</strong> Provide an interactive dashboard with Chart.js to monitor inspection throughput, classification distribution, and audit logs.</li>
+                    <li><strong>Robust Production Practices:</strong> Enforce strict file validation (PIL header inspection, path traversal guards, UUID naming) and graceful degradation when model weights are not loaded.</li>
+                </ul>
+            </section>
+
+            <!-- 3. Transfer Learning & MobileNetV2 -->
+            <section id="architecture">
+                <h2>3. Machine Learning Approach: MobileNetV2 Transfer Learning</h2>
+                <p>
+                    Training deep neural networks from scratch requires hundreds of thousands of labeled images and days of compute. Transfer learning solves this by transferring feature representations learned on massive benchmarks (ImageNet) to specialized domain tasks.
+                </p>
+                <h3>Why MobileNetV2?</h3>
+                <p>
+                    MobileNetV2 was chosen for its high accuracy-to-compute ratio:
+                </p>
+                <ul>
+                    <li><strong>Depthwise Separable Convolutions:</strong> Factorizes standard convolutions into a depthwise convolution and a 1&times;1 pointwise convolution, cutting parameters and FLOPs by up to 85%.</li>
+                    <li><strong>Inverted Residuals with Linear Bottlenecks:</strong> Retains non-linear expressiveness in expanded intermediate layers while preventing information loss through linear bottlenecks.</li>
+                    <li><strong>Edge/Cloud Portability:</strong> Weighing only ~14 MB, the model delivers low latency (&lt;150 ms) suitable for production servers and edge cameras.</li>
+                </ul>
+                <h3>Model Topology</h3>
+                <p>
+                    The base model is initialized with ImageNet weights and frozen during initial feature extraction. The custom classification head consists of:
+                </p>
+                <ol>
+                    <li><code>GlobalAveragePooling2D</code>: Collapses spatial dimensions (7&times;7&times;1280 to 1280) while preserving feature activations.</li>
+                    <li><code>Dropout(0.3)</code>: Prevents overfitting by randomly deactivating 30% of neurons during training.</li>
+                    <li><code>Dense(1, activation='sigmoid')</code>: Emits a continuous probability score bounded between 0.0 and 1.0.</li>
+                </ol>
+            </section>
+
+            <!-- 4. Preprocessing Pipeline -->
+            <section id="preprocessing">
+                <h2>4. Image Preprocessing &amp; Parity</h2>
+                <p>
+                    A critical pitfall in computer vision systems is "train-serve skew" — when inference preprocessing differs from training preprocessing. In FreshVision AI, exact mathematical parity is maintained:
+                </p>
+                <div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem; font-family: monospace; font-size: 0.9rem; margin-bottom: 1rem;">
+                    tensor = (pixel_array / 127.5) - 1.0  # Scales RGB [0, 255] to [-1.0, 1.0]
+                </div>
+                <p>During training, data augmentation is applied strictly to the training split only:</p>
+                <ul>
+                    <li>Random horizontal &amp; vertical flips</li>
+                    <li>Random rotation (&plusmn;20 degrees)</li>
+                    <li>Random zoom (&plusmn;15%)</li>
+                    <li>Brightness &amp; contrast jittering</li>
+                </ul>
+                <p>Validation and test splits undergo deterministic resizing and normalization only, guaranteeing zero data leakage.</p>
+            </section>
+
+            <!-- 5. Dataset Preparation -->
+            <section id="dataset">
+                <h2>5. Dataset Preparation &amp; Structure</h2>
+                <p>
+                    The system supports standard directory-based dataset structures commonly used in benchmark food datasets (such as Kaggle Fresh and Rotten Fruits &amp; Vegetables):
+                </p>
+                <div style="background: #0F172A; color: #34D399; border-radius: var(--radius-md); padding: 1.25rem; font-family: monospace; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.25rem;">
+dataset/<br>
+├── train/<br>
+│   ├── fresh/    (Training fresh fruits &amp; vegetables)<br>
+│   └── spoiled/  (Training spoiled fruits &amp; vegetables)<br>
+├── validation/<br>
+│   ├── fresh/    (Hyperparameter tuning &amp; early stopping)<br>
+│   └── spoiled/<br>
+└── test/<br>
+    ├── fresh/    (Strictly held-out unseen final evaluation)<br>
+    └── spoiled/
+                </div>
+                <p>
+                    The training pipeline automatically scans directories, checks image counts, verifies class balance, and validates file headers before training starts.
+                </p>
+            </section>
+
+            <!-- 6. Evaluation & Metrics -->
+            <section id="evaluation">
+                <h2>6. Model Evaluation Methodology</h2>
+                <p>
+                    FreshVision AI avoids synthetic or hardcoded metrics. All reported numbers on the Performance page reflect held-out test evaluations:
+                </p>
+                <ul>
+                    <li><strong>Accuracy:</strong> Proportion of correct classifications across all test samples.</li>
+                    <li><strong>Precision:</strong> \(\frac{TP}{TP + FP}\) &mdash; measures how many items predicted as fresh or spoiled were genuinely of that class.</li>
+                    <li><strong>Recall (Sensitivity):</strong> \(\frac{TP}{TP + FN}\) &mdash; crucial in food inspection to ensure decayed food is not mistakenly labeled fresh.</li>
+                    <li><strong>F1-Score:</strong> Harmonic mean of Precision and Recall.</li>
+                    <li><strong>Confusion Matrix:</strong> Explicit enumeration of True Positives, True Negatives, False Positives, and False Negatives.</li>
+                </ul>
+            </section>
+
+            <!-- 7. Limitations & Ethics -->
+            <section id="limitations">
+                <h2>7. Project Limitations &amp; Ethical Considerations</h2>
+                <div class="alert-box alert-warning">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <div>
+                        <strong>Essential Food Safety Notice:</strong>
+                        <p style="margin-top: 0.25rem; margin-bottom: 0;">
+                            Visual freshness does not guarantee microbial or chemical safety. Pathogenic microbes such as <em>Salmonella, E. coli, Norovirus, and Listeria</em> are microscopic and cannot be detected by camera RGB sensors. Never consume food solely because an AI model evaluated the exterior as fresh.
+                        </p>
+                    </div>
+                </div>
+                <p>Key limitations include:</p>
+                <ul>
+                    <li><strong>Internal Spoilage:</strong> Internal browning, core rot, and sub-surface bruising without external lesions cannot be identified without hyperspectral or X-ray imaging.</li>
+                    <li><strong>Odor &amp; Volatiles:</strong> Visual AI cannot analyze microbial gas production or volatile organic compounds (VOCs).</li>
+                    <li><strong>Lighting &amp; Specimen Occlusion:</strong> Overexposed lighting or partial occlusions can degrade prediction confidence.</li>
+                </ul>
+            </section>
+
+            <!-- 8. Future Enhancements -->
+            <section id="future">
+                <h2>8. Future Enhancements</h2>
+                <ul>
+                    <li><strong>Multi-Class Spoilage Classification:</strong> Expand classification from binary Fresh/Spoiled to specific defect categories (e.g., Anthracnose, Powdery Mildew, Soft Rot, Mechanical Bruising).</li>
+                    <li><strong>Object Detection &amp; Segmentation:</strong> Incorporate YOLOv8 or Mask R-CNN to localize multiple produce items in a single grocery crate and pinpoint localized decay zones.</li>
+                    <li><strong>Hyperspectral Sensor Fusion:</strong> Integrate near-infrared (NIR) sensors with RGB imagery for non-destructive internal sugar and moisture analysis.</li>
+                    <li><strong>Edge Deployment:</strong> Convert models to TensorFlow Lite (TFLite) or ONNX format for on-device inference on Raspberry Pi or Android smart agriculture hardware.</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

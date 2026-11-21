@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}Food Quality Analyzer - FreshVision AI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">Interactive Food Quality Analyzer</h1>
+        <p class="page-subtitle">
+            Upload high-resolution images of fruits or vegetables to run deep transfer learning inference and assess freshness indicators.
+        </p>
+    </div>
+
+    <!-- Analyzer Two-Column Layout -->
+    <div class="analyzer-grid">
+        <!-- Left: Upload & Preview Card -->
+        <div class="card" style="position: relative;">
+            <div class="card-header">
+                <h3 class="card-title">Upload Food Specimen</h3>
+                <span class="badge" style="background: #F1F5F9; color: var(--text-secondary); font-size: 0.75rem;">
+                    JPG, PNG, WebP &bull; Max 10MB
+                </span>
+            </div>
+
+            <!-- Drag & Drop Zone -->
+            <div class="dropzone" id="dropzone">
+                <input type="file" id="fileInput" class="file-input-hidden" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                <div class="dropzone-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                <h4 class="dropzone-title">Drag &amp; Drop Food Image Here</h4>
+                <p class="dropzone-subtitle">or click anywhere in this area to browse from your device</p>
+                <button type="button" class="btn btn-secondary btn-sm" id="browseBtn">
+                    Browse File
+                </button>
+            </div>
+
+            <!-- Image Preview Box -->
+            <div class="preview-container" id="previewContainer">
+                <div class="preview-wrapper">
+                    <img id="previewImage" class="preview-img" alt="Uploaded Specimen Preview">
+                </div>
+                <div class="preview-actions">
+                    <button type="button" class="btn btn-primary" id="analyzeBtn" style="flex: 1;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        <span>Analyze Food Quality</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="clearBtn">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Validation Error Message -->
+            <div id="uploadError" class="alert-box alert-warning" style="display: none; margin-top: 1.25rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span id="uploadErrorText">Error message</span>
+            </div>
+
+            <!-- Loading Spinner Overlay -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="spinner"></div>
+                <div class="loading-text" id="loadingStage">Preprocessing Image Tensor...</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Running MobileNetV2 feature extraction</div>
+            </div>
+        </div>
+
+        <!-- Right: Results Card & Guidance -->
+        <div>
+            <!-- Default Guidance Card (Before Analysis) -->
+            <div class="card" id="guidanceCard">
+                <div class="card-header">
+                    <h3 class="card-title">Analysis Protocol &amp; Guidelines</h3>
+                </div>
+                <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.65;">
+                    <p style="margin-bottom: 1rem;">
+                        To achieve optimal inference accuracy with the MobileNetV2 model:
+                    </p>
+                    <ul style="padding-left: 1.25rem; margin-bottom: 1.25rem;">
+                        <li><strong>Clear Lighting:</strong> Ensure the fruit or vegetable is well lit without harsh shadows or lens reflections.</li>
+                        <li><strong>Centered Subject:</strong> Position the produce in the center of the frame so surface features dominate the 224&times;224 tensor.</li>
+                        <li><strong>Natural Angles:</strong> Rotate the item to show any suspicious spots, bruising, or fungal growth if inspecting potential spoilage.</li>
+                        <li><strong>Supported Classes:</strong> Trained on common produce classes (apples, bananas, oranges, tomatoes, peppers, etc.).</li>
+                    </ul>
+                    <div class="alert-box alert-info" style="margin-bottom: 0;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        <span>
+                            Image classification estimates <strong>visual freshness only</strong>. It cannot detect bacterial toxins (e.g., <em>Salmonella</em>) or chemical residues.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Result Card (After Analysis) -->
+            <div class="result-card" id="resultCard">
+                <div class="result-header">
+                    <div>
+                        <span style="font-size: 0.775rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700;">
+                            Inference Result
+                        </span>
+                        <div class="result-verdict" style="margin-top: 0.25rem;">
+                            <span class="badge verdict-badge-large" id="resultBadge">Fresh</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Confidence Score</div>
+                        <div style="font-size: 1.75rem; font-weight: 800; color: var(--text-primary);" id="resultConfidence">
+                            95.2%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Confidence Bar -->
+                <div class="confidence-box">
+                    <div class="confidence-header">
+                        <span>Classification Confidence</span>
+                        <span id="confidenceLabel">Strong Certainty</span>
+                    </div>
+                    <div class="confidence-bar-bg">
+                        <div class="confidence-bar-fill fill-fresh" id="confidenceBarFill"></div>
+                    </div>
+                </div>
+
+                <!-- Model Explanation -->
+                <div class="result-explanation" id="resultExplanation">
+                    Explanation text will appear here.
+                </div>
+
+                <!-- Metadata List -->
+                <div class="result-meta-list">
+                    <div class="result-meta-item">
+                        Timestamp: <span id="metaTimestamp">--</span>
+                    </div>
+                    <div class="result-meta-item">
+                        Model Version: <span id="metaModelVersion">--</span>
+                    </div>
+                    <div class="result-meta-item">
+                        Record ID: <span id="metaRecordId">#--</span>
+                    </div>
+                    <div class="result-meta-item">
+                        Status: <span id="metaCertainty">Verified</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-primary" id="analyzeAnotherBtn" style="flex: 1;">
+                        Analyze Another Sample
+                    </button>
+                    <a href="{{ url_for('main.history') }}" class="btn btn-secondary">
+                        View in History
+                    </a>
+                </div>
+            </div>
+
+            <!-- Model Missing Error Card -->
+            <div class="card" id="modelMissingCard" style="display: none; border-color: #FDE68A; background-color: #FFFDF5;">
+                <div class="card-header" style="border-color: #FEF3C7;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #B45309;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3 class="card-title" style="color: #92400E;">Model Weights Not Found</h3>
+                    </div>
+                </div>
+                <div style="font-size: 0.95rem; color: #78350F; line-height: 1.6;">
+                    <p style="margin-bottom: 1rem;">
+                        The machine learning model weights (<code>models/food_quality_model.keras</code>) have not been trained or placed in the models directory yet.
+                    </p>
+                    <div style="background: #FFFFFF; border: 1px solid #FDE68A; border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
+                        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">To train the real model right now:</p>
+                        <ol style="padding-left: 1.25rem; font-family: monospace; font-size: 0.85rem; color: var(--text-primary);">
+                            <li>python train_model.py</li>
+                        </ol>
+                    </div>
+                    <p style="font-size: 0.85rem; color: #92400E;">
+                        Once the training script completes its epochs and saves the model, refresh this page to begin immediate live predictions!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analyzer.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}Side-by-Side Case Comparison | LexBrief AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="page-title-row">
+            <div>
+                <span class="badge-accent"><i class="fa-solid fa-columns"></i> Module 4</span>
+                <h1 class="page-title">Side-by-Side Case Comparison & Concordance Interface</h1>
+                <p class="page-subtitle">Align multiple court judgments across Facts, Issues, Arguments, Ratio Decidendi, and Rulings to evaluate judicial alignment or factual distinctions.</p>
+            </div>
+            <div class="page-actions">
+                <a href="{{ url_for('summarize_page') }}" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-file-contract"></i> Single Case Summarizer
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container main-content-wrapper">
+    <!-- Case Selection Card -->
+    <div class="card comparison-selector-card">
+        <form action="{{ url_for('compare_page') }}" method="GET" class="comparison-form">
+            <div class="comparison-selectors-row">
+                <div class="case-select-box">
+                    <label for="case1"><i class="fa-solid fa-scale-unbalanced-flip text-primary"></i> <strong>Case 1 (Primary Benchmark):</strong></label>
+                    <select name="case_id" id="case1" class="form-control" required>
+                        {% for c in cases %}
+                        <option value="{{ c.id }}" {% if selected_ids|length > 0 and selected_ids[0] == c.id %}selected{% endif %}>
+                            {{ c.title }} ({{ c.citation }}) - [{{ c.domain }}]
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="comparison-vs-badge">VS</div>
+
+                <div class="case-select-box">
+                    <label for="case2"><i class="fa-solid fa-scale-balanced text-primary"></i> <strong>Case 2 (Comparative Judgment):</strong></label>
+                    <select name="case_id" id="case2" class="form-control" required>
+                        {% for c in cases %}
+                        <option value="{{ c.id }}" {% if selected_ids|length > 1 and selected_ids[1] == c.id %}selected{% elif selected_ids|length <= 1 and loop.index == 2 %}selected{% endif %}>
+                            {{ c.title }} ({{ c.citation }}) - [{{ c.domain }}]
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="compare-action-box">
+                    <button type="submit" class="btn btn-primary btn-block btn-compare-submit">
+                        <i class="fa-solid fa-arrows-split-up-and-left"></i> Run Comparison
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Quick Comparative Presets -->
+        <div class="preset-comparison-row">
+            <span class="preset-label"><i class="fa-solid fa-sliders"></i> Suggested Precedent Pairs:</span>
+            <div class="preset-pills-list">
+                <a href="{{ url_for('compare_page', case_id=['miranda-1966', 'dk-basu-1997']) }}" class="preset-pill">
+                    <i class="fa-solid fa-shield"></i> Miranda vs. D.K. Basu (Custodial Rights)
+                </a>
+                <a href="{{ url_for('compare_page', case_id=['donoghue-1932', 'jacob-mathew-2005']) }}" class="preset-pill">
+                    <i class="fa-solid fa-stethoscope"></i> Donoghue vs. Jacob Mathew (Negligence)
+                </a>
+                <a href="{{ url_for('compare_page', case_id=['puttaswamy-2017', 'shreya-singhal-2015']) }}" class="preset-pill">
+                    <i class="fa-solid fa-lock"></i> Puttaswamy vs. Shreya Singhal (Fundamental Rights)
+                </a>
+                <a href="{{ url_for('compare_page', case_id=['donoghue-1932', 'mc-mehta-1987']) }}" class="preset-pill">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Donoghue vs. M.C. Mehta (Tort Standards)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% if comparison and not comparison.error %}
+    <!-- Concordance & Judicial Relationship Card -->
+    <div class="card concordance-card">
+        <div class="concordance-header">
+            <div class="concordance-status">
+                <span class="badge-status badge-{{ comparison.analysis.relationship_badge }}">
+                    <i class="fa-solid fa-code-compare"></i> {{ comparison.analysis.relationship }}
+                </span>
+                <span class="concordance-score">
+                    <strong>{{ comparison.analysis.similarity_score }}%</strong> Doctrinal Reasoning Alignment
+                </span>
+            </div>
+        </div>
+        <p class="concordance-description">{{ comparison.analysis.description }}</p>
+        {% if comparison.analysis.shared_statutes %}
+        <div class="shared-statutes-box">
+            <strong>Shared Statutory References:</strong>
+            {% for s in comparison.analysis.shared_statutes %}
+            <span class="statute-tag">{{ s }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Side-by-Side Comparison Matrix -->
+    <div class="comparison-matrix-wrapper">
+        <!-- Header Case Cards -->
+        <div class="matrix-grid-2col">
+            {% for meta in comparison.matrix.metadata %}
+            <div class="card matrix-header-card">
+                <div class="flex-between">
+                    <span class="domain-tag">{{ meta.domain }}</span>
+                    <span class="outcome-badge outcome-{{ meta.outcome.badge }}">{{ meta.outcome.status }}</span>
+                </div>
+                <h3 class="matrix-case-title">{{ meta.title }}</h3>
+                <div class="matrix-meta-details">
+                    <span><i class="fa-solid fa-bookmark"></i> {{ meta.citation }}</span><br>
+                    <span><i class="fa-solid fa-building-columns"></i> {{ meta.court }} • {{ meta.date }}</span>
+                </div>
+                <a href="{{ url_for('summarize_page', case_id=meta.id) }}" class="btn btn-sm btn-outline-primary" style="margin-top: 10px;">
+                    <i class="fa-solid fa-file-contract"></i> View Full Individual Brief
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 1: Core Issues -->
+        <div class="matrix-section-title"><i class="fa-solid fa-circle-question"></i> I. Questions of Law & Core Issues Framed</div>
+        <div class="matrix-grid-2col">
+            {% for item in comparison.matrix.issues %}
+            <div class="card matrix-content-card">
+                <h4 class="card-column-label">{{ item.title }}</h4>
+                <ul class="matrix-list">
+                    {% for issue in item.content %}
+                    <li>{{ issue }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 2: Case Facts -->
+        <div class="matrix-section-title"><i class="fa-solid fa-book-open"></i> II. Case Facts & Factual Matrix</div>
+        <div class="matrix-grid-2col">
+            {% for item in comparison.matrix.facts %}
+            <div class="card matrix-content-card">
+                <h4 class="card-column-label">{{ item.title }}</h4>
+                <ul class="matrix-list">
+                    {% for fact in item.content %}
+                    <li>{{ fact }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 3: Arguments -->
+        <div class="matrix-section-title"><i class="fa-solid fa-comments"></i> III. Arguments Presented by Parties</div>
+        <div class="matrix-grid-2col">
+            {% for item in comparison.matrix.arguments %}
+            <div class="card matrix-content-card">
+                <h4 class="card-column-label">{{ item.title }}</h4>
+                <ul class="matrix-list">
+                    {% for arg in item.content %}
+                    <li>{{ arg }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 4: Reasoning & Ratio Decidendi -->
+        <div class="matrix-section-title"><i class="fa-solid fa-brain"></i> IV. Legal Reasoning & Ratio Decidendi</div>
+        <div class="matrix-grid-2col">
+            {% for item in comparison.matrix.reasoning %}
+            <div class="card matrix-content-card highlight-reasoning">
+                <h4 class="card-column-label">{{ item.title }}</h4>
+                <div class="ratio-highlight-box">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>{{ item.content }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 5: Statutes Cited -->
+        <div class="matrix-section-title"><i class="fa-solid fa-scale-balanced"></i> V. Statutes & Provisions Cited</div>
+        <div class="matrix-grid-2col">
+            {% for item in comparison.matrix.statutes %}
+            <div class="card matrix-content-card">
+                <h4 class="card-column-label">{{ item.title }}</h4>
+                <div class="tags-container">
+                    {% for s in item.content %}
+                    <span class="statute-tag">{{ s }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 6: Rulings -->
+        <div class="matrix-section-title"><i class="fa-solid fa-gavel"></i> VI. Final Ruling, Holding & Disposition</div>
+        <div class="matrix-grid-2col">
+            {% for item in comparison.matrix.rulings %}
+            <div class="card matrix-content-card highlight-ruling">
+                <h4 class="card-column-label">{{ item.title }}</h4>
+                <ul class="matrix-list">
+                    {% for r in item.content %}
+                    <li><strong>{{ r }}</strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% elif comparison and comparison.error %}
+    <div class="card empty-card">
+        <div class="empty-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h3>Comparison Error</h3>
+        <p>{{ comparison.error }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

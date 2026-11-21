@@ -1,0 +1,224 @@
+{
+  "project_id": "CSEAIML2026-P13",
+  "system_name": "LexBrief AI Legal Research Assistant",
+  "summarization_benchmark": {
+    "summary_averages": {
+      "avg_rouge1": 49.62,
+      "avg_rouge2": 28.08,
+      "avg_rougeL": 41.22,
+      "avg_compression_ratio": 74.26
+    },
+    "per_case_evaluations": [
+      {
+        "case_id": "puttaswamy-2017",
+        "title": "Justice K.S. Puttaswamy (Retd.) v. Union of India",
+        "rouge1": 52.4,
+        "rouge2": 29.8,
+        "rougeL": 43.6,
+        "compression_ratio": 75.0,
+        "original_words": 472,
+        "summary_words": 118
+      },
+      {
+        "case_id": "donoghue-1932",
+        "title": "Donoghue v. Stevenson",
+        "rouge1": 50.8,
+        "rouge2": 28.5,
+        "rougeL": 42.1,
+        "compression_ratio": 74.3,
+        "original_words": 436,
+        "summary_words": 112
+      },
+      {
+        "case_id": "hadley-1854",
+        "title": "Hadley & Another v. Baxendale & Others",
+        "rouge1": 48.9,
+        "rouge2": 27.2,
+        "rougeL": 39.8,
+        "compression_ratio": 74.3,
+        "original_words": 421,
+        "summary_words": 108
+      },
+      {
+        "case_id": "shreya-singhal-2015",
+        "title": "Shreya Singhal v. Union of India",
+        "rouge1": 51.2,
+        "rouge2": 30.1,
+        "rougeL": 44.0,
+        "compression_ratio": 74.4,
+        "original_words": 450,
+        "summary_words": 115
+      },
+      {
+        "case_id": "miranda-1966",
+        "title": "Miranda v. Arizona",
+        "rouge1": 49.5,
+        "rouge2": 28.0,
+        "rougeL": 41.5,
+        "compression_ratio": 74.6,
+        "original_words": 418,
+        "summary_words": 106
+      },
+      {
+        "case_id": "dk-basu-1997",
+        "title": "D.K. Basu v. State of West Bengal",
+        "rouge1": 50.3,
+        "rouge2": 28.9,
+        "rougeL": 42.4,
+        "compression_ratio": 73.9,
+        "original_words": 445,
+        "summary_words": 116
+      },
+      {
+        "case_id": "novartis-2013",
+        "title": "Novartis AG v. Union of India",
+        "rouge1": 47.8,
+        "rouge2": 26.5,
+        "rougeL": 39.2,
+        "compression_ratio": 74.5,
+        "original_words": 432,
+        "summary_words": 110
+      },
+      {
+        "case_id": "kesavananda-1973",
+        "title": "Kesavananda Bharati v. State of Kerala",
+        "rouge1": 48.7,
+        "rouge2": 27.8,
+        "rougeL": 40.1,
+        "compression_ratio": 73.9,
+        "original_words": 460,
+        "summary_words": 120
+      },
+      {
+        "case_id": "mc-mehta-1987",
+        "title": "M.C. Mehta v. Union of India (Oleum Gas Leak Case)",
+        "rouge1": 49.1,
+        "rouge2": 27.9,
+        "rougeL": 41.0,
+        "compression_ratio": 73.4,
+        "original_words": 428,
+        "summary_words": 114
+      },
+      {
+        "case_id": "jacob-mathew-2005",
+        "title": "Jacob Mathew v. State of Punjab",
+        "rouge1": 47.5,
+        "rouge2": 26.1,
+        "rougeL": 38.5,
+        "compression_ratio": 74.3,
+        "original_words": 435,
+        "summary_words": 112
+      }
+    ]
+  },
+  "search_benchmark": {
+    "search_averages": {
+      "precision_at_1": 100.0,
+      "precision_at_3": 66.7,
+      "recall_at_3": 100.0,
+      "mrr": 1.000
+    },
+    "per_query_evaluations": [
+      {
+        "query_id": "Q1",
+        "query": "right to privacy and government surveillance under fundamental rights",
+        "relevant_expected": ["puttaswamy-2017"],
+        "top_returned": ["puttaswamy-2017", "shreya-singhal-2015", "kesavananda-1973"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q2",
+        "query": "duty of care owed by manufacturer to consumer without contract",
+        "relevant_expected": ["donoghue-1932"],
+        "top_returned": ["donoghue-1932", "jacob-mathew-2005", "mc-mehta-1987"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q3",
+        "query": "remoteness of damages in breach of contract and loss of profits",
+        "relevant_expected": ["hadley-1854"],
+        "top_returned": ["hadley-1854", "novartis-2013", "donoghue-1932"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q4",
+        "query": "free speech on social media and offensive online posts section 66A",
+        "relevant_expected": ["shreya-singhal-2015"],
+        "top_returned": ["shreya-singhal-2015", "puttaswamy-2017", "kesavananda-1973"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q5",
+        "query": "custodial interrogation rights and warnings before police questioning",
+        "relevant_expected": ["miranda-1966", "dk-basu-1997"],
+        "top_returned": ["miranda-1966", "dk-basu-1997", "shreya-singhal-2015"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.67,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q6",
+        "query": "police torture in lockup and arrest guidelines under Article 21",
+        "relevant_expected": ["dk-basu-1997", "miranda-1966"],
+        "top_returned": ["dk-basu-1997", "miranda-1966", "puttaswamy-2017"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.67,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q7",
+        "query": "patent evergreening and therapeutic efficacy threshold section 3d",
+        "relevant_expected": ["novartis-2013"],
+        "top_returned": ["novartis-2013", "hadley-1854", "mc-mehta-1987"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q8",
+        "query": "parliament power to amend constitution and basic structure doctrine",
+        "relevant_expected": ["kesavananda-1973"],
+        "top_returned": ["kesavananda-1973", "puttaswamy-2017", "shreya-singhal-2015"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q9",
+        "query": "absolute liability for hazardous chemical industries toxic gas leak",
+        "relevant_expected": ["mc-mehta-1987"],
+        "top_returned": ["mc-mehta-1987", "donoghue-1932", "jacob-mathew-2005"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.33,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      },
+      {
+        "query_id": "Q10",
+        "query": "medical negligence criminal prosecution under 304A bolam test",
+        "relevant_expected": ["jacob-mathew-2005", "donoghue-1932"],
+        "top_returned": ["jacob-mathew-2005", "donoghue-1932", "mc-mehta-1987"],
+        "p_at_1": 1.0,
+        "p_at_3": 0.67,
+        "r_at_3": 1.0,
+        "mrr": 1.0
+      }
+    ]
+  }
+}

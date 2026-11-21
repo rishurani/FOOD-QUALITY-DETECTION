@@ -1,0 +1,472 @@
+[
+  {
+    "id": "puttaswamy-2017",
+    "title": "Justice K.S. Puttaswamy (Retd.) v. Union of India",
+    "citation": "(2017) 10 SCC 1",
+    "court": "Supreme Court of India (9-Judge Constitution Bench)",
+    "bench": ["J.S. Khehar C.J.", "J. Chelameswar", "S.A. Bobde", "R.F. Nariman", "D.Y. Chandrachud"],
+    "date": "August 24, 2017",
+    "domain": "Constitutional Law",
+    "statutes_cited": ["Article 21 of the Constitution", "Article 14 of the Constitution", "Article 19 of the Constitution", "Article 32 of the Constitution"],
+    "precedents_cited": ["M.P. Sharma v. Satish Chandra", "Kharak Singh v. State of U.P.", "Maneka Gandhi v. Union of India"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Right to privacy unanimously affirmed as a fundamental constitutional right under Article 21."
+    },
+    "issues": [
+      "Whether the Right to Privacy is a Fundamental Right guaranteed under Part III of the Constitution of India.",
+      "Whether previous decisions in M.P. Sharma (1954) and Kharak Singh (1962) correctly laid down that privacy is not constitutionally protected."
+    ],
+    "ratio_decidendi": "The right to privacy is an intrinsic part of the right to life and personal liberty under Article 21, and as a part of the freedoms guaranteed by Part III of the Constitution. Privacy includes informational privacy, bodily autonomy, and spatial privacy, subject to proportionality and legitimate state interest.",
+    "irac": {
+      "facts": [
+        "The constitutional validity of the Aadhaar biometric identification scheme was challenged via writ petitions before the Supreme Court.",
+        "The Union Government argued that the Constitution of India does not explicitly recognize a fundamental right to privacy, relying on prior Constitution Bench decisions in M.P. Sharma and Kharak Singh.",
+        "A three-judge bench referred the question to a nine-judge Constitution Bench to definitively resolve whether privacy is protected under Part III."
+      ],
+      "issues": [
+        "Whether the right to privacy is protected as an independent or intrinsic fundamental right under Part III of the Constitution.",
+        "Whether state surveillance and biometric data collection require proportional justification and statutory safeguards."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: Privacy is an inalienable natural right foundational to human dignity, personal autonomy, and liberty guaranteed by Articles 14, 19, and 21.",
+        "Respondent/State Contention: The framers of the Constitution deliberately chose not to include privacy in Part III, and collective welfare outweighs individual privacy claims."
+      ],
+      "reasoning": [
+        "Privacy is not a created right but an intrinsic core of human dignity, liberty, and personal autonomy.",
+        "Any state encroachment on personal privacy must satisfy the three-fold test of legality, legitimate state aim, and proportionality.",
+        "Informational privacy and protection against unwarranted state surveillance are fundamental in a digital age."
+      ],
+      "ruling": [
+        "The nine-judge bench unanimously held that the Right to Privacy is a fundamental right protected under Article 21 and Part III of the Constitution.",
+        "The decisions in M.P. Sharma and Kharak Singh were expressly overruled to the extent they denied privacy as a fundamental right."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nCivil Original Jurisdiction\nWrit Petition (Civil) No. 494 of 2012\nJustice K.S. Puttaswamy (Retd.) and Another v. Union of India and Others\nDecided on: August 24, 2017\nCoram: J.S. Khehar C.J., J. Chelameswar, S.A. Bobde, R.K. Agrawal, R.F. Nariman, A.M. Sapre, D.Y. Chandrachud, S.K. Kaul, and S. Abdul Nazeer JJ.\n\nJUDGMENT\nDr. D.Y. Chandrachud, J.\n\n1. The brief facts of the case are that the constitutional validity of the Aadhaar scheme, which involved collecting biometric and demographic data of all Indian residents, was challenged before this Court on the ground that it violates the fundamental right to privacy of citizens. The Union of India contended that the Constitution does not recognize privacy as a fundamental right, relying on the eight-judge bench decision in M.P. Sharma v. Satish Chandra and the six-judge bench in Kharak Singh v. State of U.P.\n\n2. The substantial question of law for consideration before this nine-judge Constitution Bench is whether there is any fundamental right of privacy guaranteed under Part III of the Constitution of India, and if so, what is its scope and content.\n\n3. Learned senior counsel for the petitioner contended that privacy is an essential component of human dignity and personal autonomy. It was submitted on behalf of the petitioners that Article 21 protects life with dignity, and bodily and informational integrity are core attributes of liberty that cannot be curtailed by arbitrary executive action.\n\n4. On the other hand, learned Attorney General for the respondent submitted that the framers of the Constitution deliberately omitted an express right to privacy. It was strongly urged by the defense that the state has a compelling public interest in preventing leakages in welfare subsidies, and individual privacy cannot override collective social security.\n\n5. We have considered the submissions with anxious care. In our considered view, life and personal liberty are not creations of the Constitution; they are inalienable natural rights recognized and protected by it. Privacy postulates the reservation of a private space for the individual. It encompasses bodily integrity, decisional autonomy, and informational privacy. The law is well settled that fundamental rights cannot be read in isolated silos but must be read harmoniously, as laid down in Maneka Gandhi v. Union of India.\n\n6. Any law or executive action that seeks to curtail the right to privacy must satisfy the three-fold requirement: (i) Legality, which postulates the existence of law; (ii) Need, defined in terms of a legitimate state aim; and (iii) Proportionality, which ensures a rational nexus between the objects and the means adopted.\n\n7. For the reasons stated above, we hold and declare that the right to privacy is a fundamental right protected under Article 21 and the freedoms guaranteed by Part III of the Constitution. The decisions in M.P. Sharma and Kharak Singh, to the extent that they hold that privacy is not a fundamental right, stand overruled. Ordered accordingly."
+  },
+  {
+    "id": "donoghue-1932",
+    "title": "Donoghue v. Stevenson",
+    "citation": "[1932] AC 562",
+    "court": "House of Lords (UK)",
+    "bench": ["Lord Atkin", "Lord Thankerton", "Lord Macmillan", "Lord Buckmaster", "Lord Tomlin"],
+    "date": "May 26, 1932",
+    "domain": "Tort & Negligence Law",
+    "statutes_cited": ["Common Law of Torts", "Law of Negligence"],
+    "precedents_cited": ["George v. Skivington", "Heaven v. Pender", "Winterbottom v. Wright"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Appeal allowed; manufacturer owes an independent duty of care to the ultimate consumer."
+    },
+    "issues": [
+      "Whether the manufacturer of an article of food or drink sold to a distributor owes a legal duty of care to the ultimate consumer in the absence of contractual privity.",
+      "Whether the presence of a decomposed snail in an opaque ginger beer bottle constitutes actionable negligence."
+    ],
+    "ratio_decidendi": "A manufacturer of products which he sells in such a form as to show that he intends them to reach the ultimate consumer in the form in which they left him with no reasonable possibility of intermediate examination owes a duty to the consumer to take reasonable care that the article is free from defect likely to cause injury.",
+    "irac": {
+      "facts": [
+        "The appellant, Mrs. May Donoghue, visited the Wellmeadow Cafe in Paisley where a friend purchased an opaque bottle of ginger beer for her.",
+        "After consuming part of the ginger beer, the remaining contents were poured into a tumbler, revealing a decomposed snail.",
+        "Mrs. Donoghue suffered severe shock and acute gastroenteritis and brought an action in negligence against David Stevenson, the manufacturer."
+      ],
+      "issues": [
+        "Whether a manufacturer owes a duty of care to the consumer without contractual privity.",
+        "What is the general test for determining the existence of a legal duty of care in negligence."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: The manufacturer placed goods in an opaque sealed container intended for immediate human consumption and owed a duty to ensure they were not poisonous.",
+        "Respondent/State Contention: In the absence of a contract between Donoghue and the manufacturer, no action in tort could be sustained, following Winterbottom v. Wright."
+      ],
+      "reasoning": [
+        "Lord Atkin formulated the classic Neighbor Principle: You must take reasonable care to avoid acts or omissions which you can reasonably foresee would be likely to injure your neighbor.",
+        "Neighbors in law are persons who are so closely and directly affected by my act that I ought reasonably to have them in contemplation.",
+        "Contractual privity cannot be used as a shield to deny tortious duty of care where goods reach the ultimate consumer without intermediate examination."
+      ],
+      "ruling": [
+        "The House of Lords held by a 3-2 majority that the appellant had a good cause of action against the manufacturer in negligence.",
+        "The appeal was allowed and the interlocutor of the Second Division of the Court of Session reversed."
+      ]
+    },
+    "text": "IN THE HOUSE OF LORDS\nDonoghue (Pauper) v. Stevenson\n[1932] AC 562\nDecided on: May 26, 1932\nCoram: Lord Buckmaster, Lord Atkin, Lord Tomlin, Lord Thankerton, Lord Macmillan.\n\nJUDGMENT\nLord Atkin:\n\n1. The brief facts of the case are that on August 26, 1928, the appellant drank a bottle of ginger beer manufactured by the respondent, which had been bought from a retailer by a friend. The ginger beer came in an opaque glass bottle sealed with a metal cap. When the friend poured out the remainder of the contents into a tumbler, a snail in a state of decomposition floated out. As a consequence, the appellant contracted serious illness, namely acute gastroenteritis, and suffered severe nervous shock.\n\n2. The point for determination is whether the manufacturer of an article of drink sold by him to a distributor in circumstances which prevent the distributor or ultimate purchaser or consumer from discovering by inspection any defect, is under any legal duty to the ultimate purchaser or consumer to take reasonable care that the article is free from defect.\n\n3. Learned counsel for the appellant contended that the manufacturer owed a duty of care to consumers who would drink his beverages, independent of contract. The appellant argues that the absence of contract between her and the manufacturer does not bar a remedy in tort for foreseeable injury.\n\n4. On the other hand, learned counsel for the respondent submitted that there was no privity of contract between the parties. Counsel for the defense urged that to hold the manufacturer liable would open the floodgates of litigation and destroy established commercial certainty.\n\n5. In our considered view, liability for negligence is based upon a general public sentiment of moral wrongdoing for which the offender must pay. The rule that you are to love your neighbor becomes in law: you must not injure your neighbor. Who then in law is my neighbor? The answer seems to be persons who are so closely and directly affected by my act that I ought reasonably to have them in contemplation as being so affected when I am directing my mind to the acts or omissions which are called in question.\n\n6. A manufacturer of products, which he sells in such a form as to show that he intends them to reach the ultimate consumer in the form in which they left him with no reasonable possibility of intermediate examination, owes a duty to the consumer to take that reasonable care.\n\n7. For the reasons stated above, in the result, the appeal is allowed. The appellant has stated a relevant cause of action against the respondent. Ordered accordingly."
+  },
+  {
+    "id": "hadley-1854",
+    "title": "Hadley & Another v. Baxendale & Others",
+    "citation": "(1854) 9 Exch 341",
+    "court": "Court of Exchequer (UK)",
+    "bench": ["Baron Alderson", "Baron Parke", "Baron Platt", "Baron Martin"],
+    "date": "February 23, 1854",
+    "domain": "Contract & Commercial Law",
+    "statutes_cited": ["Common Law of Contract", "Damages for Breach of Contract"],
+    "precedents_cited": ["Black v. Baxendale", "Nurse v. Barns"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Appeal allowed; new trial ordered on ground that lost profits were too remote to be recovered."
+    },
+    "issues": [
+      "What is the legal measure of damages recoverable for breach of contract.",
+      "Whether lost profits resulting from delay in transporting a broken mill shaft are recoverable when special circumstances were not communicated to the carrier."
+    ],
+    "ratio_decidendi": "Damages for breach of contract must be such as may fairly and reasonably be considered either arising naturally (according to the usual course of things) or such as may reasonably be supposed to have been in the contemplation of both parties at the time they made the contract, as the probable result of the breach.",
+    "irac": {
+      "facts": [
+        "The plaintiffs operated a steam-powered flour mill in Gloucester whose crankshaft broke, stopping all milling operations.",
+        "The plaintiffs engaged the defendants, common carriers trading as Pickford & Co., to transport the broken shaft to Greenwich as a pattern for a new shaft.",
+        "Due to neglect by the defendants, delivery was delayed for seven days, during which the mill remained idle and the plaintiffs lost profits of £300."
+      ],
+      "issues": [
+        "Whether lost profits can be recovered as damages for breach of carriage contract.",
+        "What constitutes the boundary of remoteness of damage in contract law."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: The defendants were common carriers informed that the mill was stopped and should have foreseen that delay would cause ongoing operational losses.",
+        "Respondent/State Contention: The defendants were not notified that the mill had no spare shaft and was completely idle solely dependent on the prompt arrival of the replacement."
+      ],
+      "reasoning": [
+        "Where two parties have made a contract which one of them has broken, the damages should be such as may fairly and reasonably be considered either arising naturally from the breach itself.",
+        "If special circumstances were communicated and known to both parties, damages would be the amount of injury which would ordinarily follow from a breach under those special circumstances.",
+        "In this case, the fact that the mill was stopped and profits would be lost was not communicated to the defendants at the time the carriage contract was concluded."
+      ],
+      "ruling": [
+        "The Court of Exchequer held that the judge ought to have told the jury not to take loss of profits into consideration.",
+        "The verdict was set aside and a new trial was ordered accordingly."
+      ]
+    },
+    "text": "IN THE COURT OF EXCHEQUER\nHadley & Another v. Baxendale & Others\n(1854) 9 Exch 341\nDecided on: February 23, 1854\nCoram: Alderson B., Parke B., Platt B., Martin B.\n\nJUDGMENT\nBaron Alderson:\n\n1. The brief facts of the case are that the plaintiffs were owners of a steam mill at Gloucester. The crankshaft of the steam engine was broken, and the mill was stopped. The plaintiffs contracted with the defendants, who were well-known carriers, to take the broken shaft to Greenwich to serve as a model for a new one. The defendants' clerk was told that the mill was stopped and that the shaft must be sent immediately. The defendants were guilty of unreasonable delay in delivering the shaft, whereby the making of the new shaft was delayed, and the plaintiffs lost profits which they otherwise would have received from running the mill.\n\n2. The question for consideration is whether the loss of profits can be taken into estimate in assessing damages for the breach of contract to carry the shaft with reasonable dispatch.\n\n3. Learned counsel for the plaintiffs contended that the defendants were informed that the mill was stopped and that every day's delay caused loss of business. The plaintiffs argue that loss of profits is the direct consequence of the carriers' negligence.\n\n4. On the other hand, learned counsel for the defendants contended that they had no notice that the plaintiffs had no other shaft, or that the mill could not work until the new shaft arrived. It was submitted on behalf of the defendants that the damages claimed were too remote and not within the contemplation of the parties.\n\n5. We have considered the submissions with great care. Where two parties have made a contract which one of them has broken, the damages which the other party ought to receive in respect of such breach of contract should be such as may fairly and reasonably be considered either arising naturally, i.e., according to the usual course of things, from such breach of contract itself, or such as may reasonably be supposed to have been in the contemplation of both parties, at the time they made the contract, as the probable result of the breach of it.\n\n6. Now, if the special circumstances under which the contract was actually made were communicated by the plaintiffs to the defendants, and thus known to both parties, the damages resulting from the breach would be the amount of injury which would ordinarily follow from a breach of contract under these special circumstances so known and communicated. But in this case, the defendants did not know that the loss of profits would be the result of their delay.\n\n7. For the reasons stated above, we hold that the judge ought to have told the jury that upon the facts then before them they ought not to take the loss of profits into consideration. The rule must be made absolute for a new trial. Ordered accordingly."
+  },
+  {
+    "id": "shreya-singhal-2015",
+    "title": "Shreya Singhal v. Union of India",
+    "citation": "(2015) 5 SCC 1",
+    "court": "Supreme Court of India",
+    "bench": ["J. Chelameswar J.", "R.F. Nariman J."],
+    "date": "March 24, 2015",
+    "domain": "Constitutional Law",
+    "statutes_cited": ["Section 66A of the Information Technology Act", "Article 19(1)(a) of the Constitution", "Article 19(2) of the Constitution"],
+    "precedents_cited": ["Romesh Thappar v. State of Madras", "Kameshwar Prasad v. State of Bihar", "S. Rangarajan v. P. Jagjivan Ram"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Section 66A of the Information Technology Act struck down in its entirety as unconstitutional."
+    },
+    "issues": [
+      "Whether Section 66A of the Information Technology Act 2000 violates the fundamental right to freedom of speech and expression guaranteed under Article 19(1)(a).",
+      "Whether the criminalization of 'offensive' speech online falls within the reasonable restrictions permitted under Article 19(2)."
+    ],
+    "ratio_decidendi": "Section 66A of the IT Act is unconstitutionally vague and overbroad, failing to draw the fundamental distinction between discussion, advocacy, and incitement. A law that produces a chilling effect on legitimate online speech and lacks clear standards violates Article 19(1)(a).",
+    "irac": {
+      "facts": [
+        "Two young women were arrested in Mumbai under Section 66A of the IT Act for posting and liking a Facebook status expressing grievance over a city shutdown.",
+        "Section 66A penalized sending any information through a computer resource that was 'grossly offensive' or had 'menacing character'.",
+        "Public interest litigations were filed challenging the constitutionality of Section 66A."
+      ],
+      "issues": [
+        "Whether Section 66A is constitutionally vague and creates an impermissible chilling effect on speech.",
+        "Whether 'offensive' speech without incitement to public disorder can be restricted under Article 19(2)."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: Section 66A contains no clear definition of what is 'grossly offensive' or 'annoying', vesting unfettered discretion in police officers and suppressing free expression.",
+        "Respondent/State Contention: The internet provides unprecedented reach and virality, requiring special statutory provisions to prevent cyber harassment and cyber defamation."
+      ],
+      "reasoning": [
+        "Free speech jurisprudence recognizes three concepts: discussion, advocacy, and incitement. Only when discussion or advocacy reaches the level of incitement does Article 19(2) kick in.",
+        "Section 66A has no proximate nexus with public order or incitement to an offence.",
+        "The doctrine of vagueness applies: a criminal penal statute must give fair warning to the citizen of what is forbidden."
+      ],
+      "ruling": [
+        "The Supreme Court struck down Section 66A of the IT Act in its entirety as violative of Article 19(1)(a).",
+        "The court held the provision was not saved by any of the eight subject matters in Article 19(2)."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nWrit Petition (Criminal) No. 167 of 2012\nShreya Singhal v. Union of India\nDecided on: March 24, 2015\nCoram: J. Chelameswar and R.F. Nariman JJ.\n\nJUDGMENT\nR.F. Nariman, J.\n\n1. The brief facts of the case are that Section 66A was inserted into the Information Technology Act, 2000 by an amendment in 2008. The section penalizes sending through a computer resource any information that is grossly offensive or has menacing character, or sending false information for the purpose of causing annoyance, inconvenience, danger, obstruction, or insult. The widespread abuse of this provision, leading to the arrest of individuals for mere political dissent or expression of views on social media platforms, prompted the filing of writ petitions challenging its constitutional validity.\n\n2. The question for consideration before us is whether Section 66A of the Information Technology Act violates the fundamental right to freedom of speech and expression guaranteed under Article 19(1)(a) of the Constitution of India, and whether it is saved by the reasonable restrictions under Article 19(2).\n\n3. Learned senior counsel for the petitioner submitted that Section 66A creates an offence that is completely vague, undefined, and subjective. Counsel urged that words like 'annoyance', 'inconvenience', and 'grossly offensive' leave ordinary citizens unable to know where the boundary between lawful speech and a criminal offence lies, creating a chilling effect on legitimate public discourse.\n\n4. On the other hand, learned Additional Solicitor General for the respondent submitted that the internet has a unique character where messages can go viral instantly and cause irreparable harm. Counsel for the state contended that Parliament is entitled to create new offences suited to the digital realm and that the Court should presume the constitutionality of the enactment.\n\n5. In our considered view, there are three fundamental concepts in understanding the freedom of speech: discussion, advocacy, and incitement. Mere discussion or even advocacy of an unpopular cause cannot be restricted. It is only when such discussion or advocacy reaches the level of incitement to violence or public disorder that reasonable restrictions under Article 19(2) can be applied.\n\n6. Section 66A casts the net so wide that virtually any expression that displeases an individual or authority can lead to criminal liability. It has no proximate nexus with public order. A criminal statute must be clear, precise, and definite so that citizens know what conduct is prohibited.\n\n7. For the reasons stated above, we hold and declare Section 66A of the Information Technology Act, 2000 to be unconstitutional and void in its entirety as it infringes the fundamental right of freedom of speech and expression guaranteed by Article 19(1)(a). The writ petition is allowed. Ordered accordingly."
+  },
+  {
+    "id": "miranda-1966",
+    "title": "Miranda v. Arizona",
+    "citation": "384 U.S. 436",
+    "court": "Supreme Court of the United States",
+    "bench": ["Chief Justice Warren", "Justice Black", "Justice Douglas", "Justice Brennan", "Justice Fortas"],
+    "date": "June 13, 1966",
+    "domain": "Criminal Law & Procedure",
+    "statutes_cited": ["Fifth Amendment to the US Constitution", "Sixth Amendment to the US Constitution"],
+    "precedents_cited": ["Escobedo v. Illinois", "Gideon v. Wainwright", "Brown v. Mississippi"],
+    "outcome": {
+      "status": "Acquitted",
+      "badge": "info",
+      "color": "#06b6d4",
+      "summary": "Reversed; custodial confession obtained without constitutional warnings held inadmissible."
+    },
+    "issues": [
+      "Whether the Fifth Amendment privilege against self-incrimination requires law enforcement to advise custodial suspects of their rights before interrogation.",
+      "Whether a written confession signed in police custody is admissible when the suspect was not notified of the right to counsel and silence."
+    ],
+    "ratio_decidendi": "Prior to any questioning in custodial interrogation, the person must be warned that he has a right to remain silent, that any statement he makes may be used as evidence against him, and that he has a right to the presence of an attorney, either retained or appointed.",
+    "irac": {
+      "facts": [
+        "Ernesto Miranda was arrested in Phoenix, Arizona in connection with kidnapping and rape charges and taken to an interrogation room.",
+        "After two hours of custodial interrogation by police officers, Miranda signed a written confession.",
+        "At no point was Miranda informed of his constitutional right to remain silent or to consult with legal counsel."
+      ],
+      "issues": [
+        "Whether statements obtained from an individual subjected to custodial interrogation are admissible without prior constitutional warnings.",
+        "Whether procedural safeguards are mandatory to protect Fifth Amendment privilege in police custody."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: Custodial interrogation in a police-dominated environment is inherently coercive, rendering confessions involuntary unless rights are explicitly communicated.",
+        "Respondent/State Contention: Miranda signed a statement acknowledging his rights on the confession sheet, and the confession was voluntary according to the totality of the circumstances."
+      ],
+      "reasoning": [
+        "Custodial interrogation places tremendous psychological pressure on the suspect.",
+        "Without proper procedural safeguards, the process of in-custody interrogation contains inherently compelling pressures that undermine the privilege against self-incrimination.",
+        "The right to counsel during interrogation is indispensable to ensure meaningful exercise of the privilege to remain silent."
+      ],
+      "ruling": [
+        "The Supreme Court held by a 5-4 vote that Miranda's confession was unconstitutionally obtained and inadmissible at trial.",
+        "The conviction was reversed and remanded."
+      ]
+    },
+    "text": "SUPREME COURT OF THE UNITED STATES\n384 U.S. 436\nMiranda v. Arizona\nDecided on: June 13, 1966\nCoram: Chief Justice Warren, Black, Douglas, Brennan, and Fortas JJ.\n\nJUDGMENT\nMr. Chief Justice Warren delivered the opinion of the Court.\n\n1. The brief facts of the case are that on March 13, 1963, Ernesto Miranda was arrested at his home and taken into custody at a Phoenix police station. There he was questioned by two police officers in an interrogation room. Two hours later, the officers emerged with a signed confession which had at its top a typed paragraph stating that the confession was made voluntarily with full knowledge of legal rights. At trial, the written confession was admitted into evidence over objection, and Miranda was convicted of kidnapping and rape.\n\n2. The question for consideration before this Court is whether the Fifth Amendment privilege against self-incrimination applies to custodial police interrogation, and whether procedural warnings are required to ensure the voluntary nature of statements obtained during detention.\n\n3. Learned counsel for the petitioner contended that custodial interrogation in isolation without counsel creates an inherently coercive atmosphere. The appellant argues that an individual in custody must be explicitly informed of his right to remain silent and to have legal representation.\n\n4. Opposing the appeal, it was contended by the State that the confession was voluntary and that Miranda was not physically coerced. Counsel for the state submitted that requiring formal warnings would hamstring effective police investigation of criminal offences.\n\n5. In our considered view, the atmosphere of custodial interrogation is inherently intimidating. When an individual is taken into police custody and subjected to questioning, his Fifth Amendment privilege against self-incrimination is jeopardized. An individual swept from familiar surroundings into police custody cannot be expected to know his rights unless they are affirmatively stated.\n\n6. Prior to any questioning, the person must be warned that he has a right to remain silent, that any statement he does make may be used as evidence against him, and that he has a right to the presence of an attorney, either retained or appointed. If the interrogation continues without the presence of an attorney and a statement is taken, a heavy burden rests on the government to demonstrate that the defendant knowingly and intelligently waived his privilege.\n\n7. For the reasons stated above, the conviction is set aside. In the result, the appeal is allowed and the judgment of the Supreme Court of Arizona is reversed. Ordered accordingly."
+  },
+  {
+    "id": "dk-basu-1997",
+    "title": "D.K. Basu v. State of West Bengal",
+    "citation": "(1997) 1 SCC 416",
+    "court": "Supreme Court of India",
+    "bench": ["Kuldip Singh J.", "A.S. Anand J."],
+    "date": "December 18, 1996",
+    "domain": "Criminal Law & Procedure",
+    "statutes_cited": ["Article 21 of the Constitution", "Article 22 of the Constitution", "Code of Criminal Procedure Section 41", "Code of Criminal Procedure Section 57"],
+    "precedents_cited": ["Nilabati Behera v. State of Orissa", "Joginder Kumar v. State of U.P.", "Rudul Sah v. State of Bihar"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Mandatory 11-point guidelines issued to prevent custodial violence and torture."
+    },
+    "issues": [
+      "Whether the growing menace of deaths and torture in police custody violates Article 21.",
+      "What preventive and remedial safeguards must be established to regulate police powers of arrest and detention."
+    ],
+    "ratio_decidendi": "Custodial violence, torture, and deaths in police lock-ups strike at the heart of the rule of law and human dignity protected by Article 21. Mandatory procedural guidelines must be followed in all cases of arrest and detention, and victims of custodial violence are entitled to monetary compensation.",
+    "irac": {
+      "facts": [
+        "Executive Chairman of Legal Aid Services West Bengal addressed a letter to the Chief Justice drawing attention to recurrent deaths in police custody.",
+        "The letter was treated as a Public Interest Writ Petition to frame national guidelines on arrest procedures.",
+        "The Law Commission and State Governments were noticed to submit frameworks to eradicate custodial brutality."
+      ],
+      "issues": [
+        "Whether existing statutory provisions under CrPC are sufficient to prevent custodial abuse.",
+        "What guidelines must be formulated by the court under Article 32 and 142 to govern arrest."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: Torture and death in lock-ups occur in secret confinement where victims have no access to independent help; monetary compensation and mandatory arrest records must be strictly enforced.",
+        "Respondent/State Contention: Police face violent criminals and require reasonable latitude in interrogation; existing criminal procedure already provides magistracy oversight."
+      ],
+      "reasoning": [
+        "Third-degree methods and custodial deaths represent worst violations of human rights and dignity guaranteed under Article 21.",
+        "Transparency in arrest and detention is the most effective antidote to custodial torture.",
+        "Failure to observe arrest safeguards shall render the concerned police officer liable for departmental action and contempt of court."
+      ],
+      "ruling": [
+        "The Supreme Court formulated 11 mandatory requirements to be followed in all cases of arrest or detention.",
+        "Directions issued requiring arrest memos, inspection memos, right of arrestee to inform a friend/relative, and medical examination every 48 hours."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nWrit Petition (Civil) No. 592 of 1987\nD.K. Basu v. State of West Bengal\nDecided on: December 18, 1996\nCoram: Kuldip Singh and Dr. A.S. Anand JJ.\n\nJUDGMENT\nDr. A.S. Anand, J.\n\n1. The brief facts of the case are that the Executive Chairman of Legal Aid Services, West Bengal, addressed a letter to the Chief Justice of India drawing attention to news items regarding deaths in police lock-ups and custody. Considering the gravity of the issue, the letter was treated as a writ petition. The court observed that custodial violence, including torture and death in the lock-up, strikes a blow at the rule of law and human dignity protected by Article 21 of the Constitution.\n\n2. The question for consideration before this Court is whether procedural safeguards can be laid down under Article 32 and Article 142 of the Constitution to protect the fundamental rights of arrestees and prevent custodial violence.\n\n3. Learned counsel for the petitioner contended that custodial crimes are of a peculiar nature committed behind closed doors of police stations where eyewitness testimony is rarely available. The petitioner submits that transparency and accountability can only be introduced by making arrest memos, medical examinations, and notification to relatives mandatory.\n\n4. Counsel for the state submitted that while torture cannot be condoned, police officers face ruthless terrorists and organized crime syndicates, and procedural requirements should not impede criminal investigations.\n\n5. In our considered view, no society governed by the rule of law can permit police brutality. Fundamental rights under Article 21 and Article 22(1) apply with full force to prisoners and detainees. Transparency of action and accountability are two safeguards which are appropriate to prevent custodial abuse.\n\n6. We therefore consider it appropriate to issue the following mandatory requirements to be followed in all cases of arrest: (1) Police personnel carrying out arrest must wear accurate name tags; (2) An arrest memo must be prepared at the time of arrest witnessed by at least one witness; (3) The arrestee has the right to inform a friend or relative; (4) The arrestee must be medically examined at the time of arrest and re-examined every 48 hours; (5) Copies of all arrest records must be sent to the Area Magistrate.\n\n7. For the reasons stated above, we hold that failure to fulfill these directions shall render the concerned officer liable for contempt of court. The writ petition is allowed. Ordered accordingly."
+  },
+  {
+    "id": "novartis-2013",
+    "title": "Novartis AG v. Union of India",
+    "citation": "(2013) 6 SCC 1",
+    "court": "Supreme Court of India",
+    "bench": ["Aftab Alam J.", "Ranjana Prakash Desai J."],
+    "date": "April 1, 2013",
+    "domain": "Intellectual Property Rights",
+    "statutes_cited": ["Section 3(d) of the Patents Act", "Section 2(1)(j) of the Patents Act", "Section 2(1)(ja) of the Patents Act", "Article 21 of the Constitution"],
+    "precedents_cited": ["Bishwanath Prasad Radhey Shyam v. Hindustan Metal Industries"],
+    "outcome": {
+      "status": "Dismissed",
+      "badge": "danger",
+      "color": "#ef4444",
+      "summary": "Patent appeal dismissed; beta crystalline form held not patentable under Section 3(d)."
+    },
+    "issues": [
+      "Whether the beta crystalline form of Imatinib Mesylate satisfies the test of invention under Section 2(1)(j) and Section 3(d) of the Patents Act 1970.",
+      "What constitutes 'enhanced therapeutic efficacy' under Section 3(d) to prevent evergreening of pharmaceutical patents."
+    ],
+    "ratio_decidendi": "Under Section 3(d) of the Patents Act, the mere discovery of a new form of a known substance which does not result in the enhancement of the known efficacy of that substance is not an invention. In pharmaceuticals, efficacy strictly means therapeutic efficacy, not merely increased bioavailability or stability.",
+    "irac": {
+      "facts": [
+        "Novartis filed a patent application for the beta crystalline form of Imatinib Mesylate, a life-saving anti-cancer drug marketed under the brand name 'Glivec'.",
+        "The Patent Controller rejected the application on grounds that the active substance was already disclosed in an earlier Zimmerman patent.",
+        "Novartis appealed, arguing that the beta crystalline form possessed 30% higher bioavailability and thermodynamic stability."
+      ],
+      "issues": [
+        "Whether 30% increase in bioavailability constitutes enhancement of therapeutic efficacy under Section 3(d).",
+        "Whether the patent application is an attempt at evergreening an expired patent monopoly."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: The beta crystalline form possesses superior flow properties, thermodynamic stability, and higher bioavailability, fulfilling both novelty and inventive step.",
+        "Respondent/State Contention: Section 3(d) was enacted by Parliament specifically to prevent evergreening; increased bioavailability does not automatically translate to enhanced therapeutic efficacy in treating leukemia."
+      ],
+      "reasoning": [
+        "Section 3(d) sets up a second tier of qualifying standards for patentability for new forms of known substances.",
+        "The legislative intent of Section 3(d) is to prevent evergreening of monopolies and ensure access to affordable medicines.",
+        "Efficacy means the ability to produce a desired effect; in pharmacology, it strictly means therapeutic efficacy."
+      ],
+      "ruling": [
+        "The Supreme Court held that the beta crystalline form of Imatinib Mesylate failed the test of Section 3(d).",
+        "The appeal filed by Novartis was dismissed."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nCivil Appellate Jurisdiction\nCivil Appeal Nos. 2706-2716 of 2013\nNovartis AG v. Union of India & Others\nDecided on: April 1, 2013\nCoram: Aftab Alam and Ranjana Prakash Desai JJ.\n\nJUDGMENT\nAftab Alam, J.\n\n1. The brief facts of the case are that the appellant, Novartis AG, filed an application before the Controller of Patents for grant of a patent for the beta crystalline form of Imatinib Mesylate, a drug used in treating Chronic Myeloid Leukemia marketed as 'Glivec'. The application was rejected on the grounds that the drug was not a new product and did not satisfy the test of enhanced efficacy under Section 3(d) of the Patents Act, 1970.\n\n2. The point for determination is whether the product for which the appellant claims a patent qualifies as an 'invention' under Section 2(1)(j) and satisfies the special threshold of enhanced therapeutic efficacy under Section 3(d) of the Act.\n\n3. Learned senior counsel for the appellant contended that the beta crystalline form possessed greater thermodynamic stability, lower hygroscopicity, and 30% higher bioavailability over the free base. The appellant argues that improved physical properties and bioavailability satisfy the requirements of inventive step and efficacy.\n\n4. On the other hand, learned counsel for the generic manufacturers and cancer patients contended that Imatinib in free base was already known. Counsel submitted that Section 3(d) was specifically enacted by Parliament to prevent evergreening, ensuring that life-saving drugs remain accessible and affordable.\n\n5. In our considered view, Section 3(d) sets up a second gate of patentability for any derivative or new form of a known substance. The section clearly mandates that unless the new form results in the enhancement of known efficacy, it cannot be deemed an invention. In the case of pharmaceuticals, efficacy must mean therapeutic efficacy, i.e., curative effect on the human body.\n\n6. Increased bioavailability, while advantageous, cannot be equated with enhancement of therapeutic efficacy unless supported by clinical proof that it produces a greater therapeutic effect. No such evidence was placed on record.\n\n7. For the reasons stated above, we hold that the product in question fails the test of Section 3(d). In the result, the appeal is dismissed with costs. Ordered accordingly."
+  },
+  {
+    "id": "kesavananda-1973",
+    "title": "Kesavananda Bharati v. State of Kerala",
+    "citation": "AIR 1973 SC 1461",
+    "court": "Supreme Court of India (13-Judge Constitution Bench)",
+    "bench": ["S.M. Sikri C.J.", "J.M. Shelat", "K.S. Hegde", "A.N. Grover", "H.R. Khanna"],
+    "date": "April 24, 1973",
+    "domain": "Constitutional Law",
+    "statutes_cited": ["Article 368 of the Constitution", "Article 13 of the Constitution", "Article 19 of the Constitution", "Article 31 of the Constitution"],
+    "precedents_cited": ["I.C. Golak Nath v. State of Punjab", "Sajjan Singh v. State of Rajasthan", "Shankari Prasad v. Union of India"],
+    "outcome": {
+      "status": "Partly Allowed",
+      "badge": "warning",
+      "color": "#8b5cf6",
+      "summary": "Basic Structure Doctrine established; Parliament cannot alter the essential framework of the Constitution."
+    },
+    "issues": [
+      "Whether Parliament possesses unlimited and plenary power to amend any provision of the Constitution under Article 368.",
+      "Whether the fundamental rights in Part III can be abrogated or extinguished through constitutional amendments."
+    ],
+    "ratio_decidendi": "Article 368 does not enable Parliament to alter the basic structure or framework of the Constitution. While Parliament has broad constituent powers to amend the Constitution, it cannot destroy the foundational identity, democratic republic character, separation of powers, or judicial review.",
+    "irac": {
+      "facts": [
+        "His Holiness Kesavananda Bharati Sripadagalvaru, head of Edneer Mutt in Kerala, challenged the Kerala Land Reforms Amendment Acts under Article 26.",
+        "During pendency of the petition, Parliament enacted the 24th, 25th, and 29th Constitutional Amendments to overcome the prior Golak Nath ruling.",
+        "A 13-judge bench, the largest in Indian judicial history, convened to hear arguments over 68 days."
+      ],
+      "issues": [
+        "Whether Parliament's amending power under Article 368 is subject to implied substantive limitations.",
+        "Whether judicial review of constitutional amendments is permissible."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: The word 'amendment' implies preserving the identity of the original structure; Parliament cannot use Article 368 to turn democracy into a totalitarian dictatorship.",
+        "Respondent/State Contention: Amending power is sovereign and unlimited; the judiciary cannot impose unwritten limitations on Parliament's constituent power."
+      ],
+      "reasoning": [
+        "The Constitution is supreme, and Parliament is a creature of the Constitution.",
+        "The power to amend is not the power to destroy. An amendment that eviscerates the basic structure destroys the Constitution itself.",
+        "Basic features include supremacy of Constitution, republican and democratic form of government, secular character, separation of powers, and federalism."
+      ],
+      "ruling": [
+        "By a 7-6 majority, the Supreme Court held that Parliament has power to amend any part of the Constitution, but cannot alter its Basic Structure.",
+        "Golak Nath overruled; Article 31C partly struck down to the extent it ousted judicial review."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nWrit Petition (Civil) No. 135 of 1970\nKesavananda Bharati Sripadagalvaru & Ors. v. State of Kerala & Anr.\nDecided on: April 24, 1973\nCoram: S.M. Sikri C.J., Shelat, Hegde, Grover, Ray, Reddy, Palekar, Khanna, Mathew, Beg, Dwivedi, Mukherjea, and Chandrachud JJ.\n\nJUDGMENT\nS.M. Sikri, C.J.:\n\n1. The brief facts of the case are that the petitioner challenged the validity of the Kerala Land Reforms Act, 1963, as amended in 1969 and 1971. While the petition was pending, Parliament passed the 24th, 25th, and 29th Amendments. The 24th Amendment declared that Parliament had power to amend any provision of the Constitution, including Fundamental Rights, under Article 368. The petitioner challenged the constitutional validity of these amendments.\n\n2. The substantial question of law for determination is what is the extent and scope of the amending power of Parliament under Article 368 of the Constitution of India, and whether there are any inherent or implied limitations on that power.\n\n3. Learned senior counsel for the petitioner contended that the power to amend does not include the power to abrogate the Constitution. Counsel urged that if Parliament's power were unfettered, it could abolish fundamental freedoms, abolish elections, and establish a permanent totalitarian regime.\n\n4. On the other hand, learned Attorney General for the respondent submitted that the amending power under Article 368 is plenary, sovereign, and subject to no implied limitations. It was argued that the will of the people expressed through elected representatives cannot be circumscribed by judicial review.\n\n5. In our considered view, every Constitution has a basic structure or framework. The expression 'amendment of this Constitution' in Article 368 means any addition or change within the broad contours of the preamble and the foundational philosophy of the Constitution. Parliament cannot change the Constitution into a totally different instrument.\n\n6. The basic structure includes: (1) Supremacy of the Constitution; (2) Republican and Democratic form of Government; (3) Secular character of the Constitution; (4) Separation of powers between the legislature, executive, and judiciary; and (5) Federal character of the Constitution. While Parliament may amend fundamental rights, it cannot damage or destroy the basic structure of the Constitution.\n\n7. For the reasons stated above, we hold that Article 368 does not enable Parliament to alter the basic structure or framework of the Constitution. Ordered accordingly."
+  },
+  {
+    "id": "mc-mehta-1987",
+    "title": "M.C. Mehta v. Union of India (Oleum Gas Leak Case)",
+    "citation": "1987 SCR (1) 819",
+    "court": "Supreme Court of India",
+    "bench": ["P.N. Bhagwati C.J.", "R.S. Pathak J.", "C.J. Misra J."],
+    "date": "December 20, 1986",
+    "domain": "Environmental Law",
+    "statutes_cited": ["Article 21 of the Constitution", "Article 32 of the Constitution"],
+    "precedents_cited": ["Rylands v. Fletcher", "Bandhua Mukti Morcha v. Union of India"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Rule of Absolute Liability established; hazardous industries strictly responsible without Rylands v. Fletcher defenses."
+    },
+    "issues": [
+      "What is the standard of liability of an enterprise engaged in a hazardous and inherently dangerous activity when an escape causes harm.",
+      "Whether the 19th-century exceptions to strict liability under Rylands v. Fletcher apply to modern hazardous industrial operations."
+    ],
+    "ratio_decidendi": "An enterprise engaged in a hazardous or inherently dangerous industry owes an absolute and non-delegable duty to the community that no harm results. If harm occurs, the enterprise is absolutely liable to compensate the victims, and liability is not subject to any of the exceptions in Rylands v. Fletcher.",
+    "irac": {
+      "facts": [
+        "In December 1985, a major leakage of oleum gas occurred from one of the units of Shriram Foods and Fertilisers Industries in Delhi.",
+        "The leak resulted in the death of an advocate and affected large numbers of Delhi residents just months after the Bhopal gas disaster.",
+        "M.C. Mehta filed a PIL under Article 32 seeking closure of the plant and compensation for victims."
+      ],
+      "issues": [
+        "What is the scope of liability for hazardous industries under Article 21 and the Law of Torts.",
+        "Whether compensation can be awarded directly under Article 32 writ jurisdiction."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: Hazardous chemical plants in populated cities represent grave danger to right to life; enterprise must bear total responsibility for injuries caused by escape.",
+        "Respondent/State Contention: The company followed safety standards, and liability must be governed by established common law principles including Act of God and third-party intervention."
+      ],
+      "reasoning": [
+        "The 1868 rule in Rylands v. Fletcher was evolved in the early industrial era and cannot govern contemporary high-risk chemical industries.",
+        "The enterprise alone has the resources and technical capability to safeguard against hazards, and must internalize the cost of accidents as a condition of its operating license.",
+        "The measure of compensation must be correlated to the magnitude and capacity of the enterprise to have a deterrent effect."
+      ],
+      "ruling": [
+        "The Supreme Court formulated the historic Principle of Absolute Liability.",
+        "Shriram Industries was directed to pay compensation and deposit security funds."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nWrit Petition (Civil) No. 12739 of 1985\nM.C. Mehta & Anr. v. Union of India & Ors.\nDecided on: December 20, 1986\nCoram: P.N. Bhagwati C.J., R.S. Pathak, and Rangnath Misra JJ.\n\nJUDGMENT\nP.N. Bhagwati, C.J.:\n\n1. The brief facts of the case are that on December 4 and 6, 1985, a severe leakage of oleum gas took place from the caustic chlorine plant of Shriram Foods and Fertilisers Industries in Delhi. One person died and several were hospitalized. This occurred while a petition under Article 32 filed by environmental activist M.C. Mehta was already pending, seeking the closure of the hazardous industrial units operating in congested areas.\n\n2. The point for determination is what is the measure of liability of an enterprise which is engaged in an industry posing potential hazard to the health and safety of persons residing in adjacent areas.\n\n3. Learned counsel for the petitioner contended that the rule in Rylands v. Fletcher was inadequate for modern industrial conditions. The petitioner submits that an enterprise operating dangerous chemical units must be held absolutely liable without any exceptions.\n\n4. Opposing the petition, learned senior counsel for Shriram contended that the company had taken all necessary precautions, and any liability must be governed by traditional tort law principles where defences such as act of god or unauthorized act of third parties are available.\n\n5. In our considered view, we are of the opinion that we cannot allow our judicial thinking to be constricted by reference to the law as it prevails in England. We have to evolve new principles and lay down new norms which would adequately deal with the new problems which arise in a highly industrialized economy.\n\n6. We hold that an enterprise which is engaged in a hazardous or inherently dangerous industry which poses a potential threat to the health and safety of the persons working in the factory and residing in the surrounding areas owes an absolute and non-delegable duty to the community to ensure that no harm results to anyone on account of hazardous or inherently dangerous nature of the activity. If any harm results, the enterprise must be absolutely liable to compensate for such harm, and it should be no answer to the enterprise to say that it had taken all reasonable care.\n\n7. For the reasons stated above, we lay down the rule of Absolute Liability. The writ petition is allowed and directions are issued accordingly."
+  },
+  {
+    "id": "jacob-mathew-2005",
+    "title": "Jacob Mathew v. State of Punjab",
+    "citation": "(2005) 6 SCC 1",
+    "court": "Supreme Court of India",
+    "bench": ["R.C. Lahoti C.J.", "G.P. Mathur J.", "P.K. Balasubramanyan J."],
+    "date": "August 5, 2005",
+    "domain": "Tort & Negligence Law",
+    "statutes_cited": ["Section 304A of the Indian Penal Code", "Law of Medical Negligence"],
+    "precedents_cited": ["Bolam v. Friern Hospital Management Committee", "Achutrao Haribhau Khodwa v. State of Maharashtra"],
+    "outcome": {
+      "status": "Allowed",
+      "badge": "success",
+      "color": "#10b981",
+      "summary": "Criminal proceedings against doctor quashed; gross medical negligence required for Section 304A."
+    },
+    "issues": [
+      "What is the standard of negligence required to hold a medical professional criminally liable under Section 304A IPC.",
+      "Whether the Bolam Test applies to determine professional medical negligence in India."
+    ],
+    "ratio_decidendi": "A medical practitioner cannot be held criminally liable under Section 304A IPC unless the negligence attributed to him was gross, reckless, or of such high degree as to show total disregard for life. An error of judgment or mere accident does not constitute criminal negligence.",
+    "irac": {
+      "facts": [
+        "A cancer patient admitted to a private hospital experienced respiratory distress and died.",
+        "The patient's sons alleged that no oxygen cylinder was immediately available and the doctor failed to provide prompt emergency resuscitation.",
+        "Police registered a criminal case under Section 304A IPC against Dr. Jacob Mathew, who moved the court to quash charges."
+      ],
+      "issues": [
+        "Whether simple negligence sufficient in civil tort is adequate to sustain a criminal prosecution under Section 304A IPC.",
+        "What guidelines should govern the arrest and prosecution of doctors for alleged medical negligence."
+      ],
+      "arguments": [
+        "Petitioner/Appellant Contention: A doctor does not guarantee a cure; criminal prosecution should not be initiated without independent medical expert opinion confirming gross negligence.",
+        "Respondent/State Contention: Non-availability of an oxygen cylinder in an emergency ward constitutes culpable rashness and neglect causing death under Section 304A."
+      ],
+      "reasoning": [
+        "The Bolam Test applies: a doctor is not negligent if he acted in accordance with a practice accepted as proper by a responsible body of medical men.",
+        "In criminal law, the degree of negligence must be gross or culpable, far higher than what suffices in a civil suit for damages.",
+        "Indiscriminate arrest and prosecution of doctors would deter them from treating critical emergency patients."
+      ],
+      "ruling": [
+        "The Supreme Court quashed the criminal prosecution against Dr. Jacob Mathew.",
+        "Laid down mandatory guidelines requiring police to obtain an independent medical opinion before proceeding against a doctor under Section 304A."
+      ]
+    },
+    "text": "IN THE SUPREME COURT OF INDIA\nCriminal Appellate Jurisdiction\nCriminal Appeal Nos. 144-145 of 2004\nJacob Mathew v. State of Punjab & Anr.\nDecided on: August 5, 2005\nCoram: R.C. Lahoti C.J., G.P. Mathur, and P.K. Balasubramanyan JJ.\n\nJUDGMENT\nR.C. Lahoti, C.J.:\n\n1. The brief facts of the case are that the father of the informant was admitted as a patient in a hospital in Ludhiana suffering from advanced cancer. On the night of February 15, 1995, the patient felt difficulty in breathing. The appellant doctor was summoned. The informant alleged that when oxygen was required, the cylinder was found to be empty, and by the time another cylinder was brought, the patient had passed away. A First Information Report under Section 304A read with Section 34 of the Indian Penal Code was registered against the appellant.\n\n2. The point for determination is what is the standard of negligence required to hold a medical professional criminally liable under Section 304A IPC, and how does it differ from civil negligence in tort.\n\n3. Learned senior counsel for the appellant contended that a medical professional cannot be held guilty of criminal negligence unless there was gross lack of care. Counsel urged that criminal prosecution of doctors without prima facie expert opinion severely damages medical practice.\n\n4. On the other hand, learned counsel for the State submitted that death was caused by rash and negligent omission to provide functional oxygen equipment in an emergency.\n\n5. In our considered view, negligence in the context of medical profession calls for a treatment with a difference. To fasten criminal liability under Section 304A IPC, the degree of negligence must be gross, or very high degree of negligence must be proved. The standard to be applied for judging is that of an ordinary competent person exercising ordinary skill in that profession.\n\n6. The classic test laid down in Bolam v. Friern Hospital Management Committee holds good: A doctor is not guilty of negligence if he has acted in accordance with a practice accepted as proper by a responsible body of medical men skilled in that particular art. A mere error of judgment or an unfortunate accident is not negligence.\n\n7. For the reasons stated above, we hold that the negligence alleged against the appellant did not constitute gross criminal negligence. The appeal is allowed and the criminal proceedings are quashed. Ordered accordingly."
+  }
+]

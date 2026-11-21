@@ -1,0 +1,26 @@
+================================================================================
+ FreshVision AI - Food Quality Detection System
+ Deployed Application & Evaluation URL
+ Course: CSE471 | Department of Computer Science & Engineering
+ Lovely Professional University
+================================================================================
+
+Team Members:
+1. Rishu Rani (Roll No: 12109845)
+2. Jagriti (Roll No: 12108732)
+
+Submitted To:
+Mr. Abhishek Tiwari, Assistant Professor, Dept. of CSE
+
+--------------------------------------------------------------------------------
+1. Local Prototype URL (Ready to Run):
+   http://127.0.0.1:5000  or  http://localhost:5000
+
+2. Cloud Deployment URL (Public Live Link):
+   https://freshvision-ai.onrender.com
+   (Alternative: https://huggingface.co/spaces/freshvision/food-quality)
+
+3. API Health Status Endpoint:
+   http://127.0.0.1:5000/api/health
+   Returns real-time status of the MobileNetV2 model and SQLite database.
+================================================================================
