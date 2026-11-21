@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LexBrief AI: AI-Based Court Case Summarization & Legal Research Assistant
 **Project ID:** `CSEAIML2026-P13`  
 **Specialization:** Computer Science & Engineering (Artificial Intelligence & Machine Learning)  
@@ -231,3 +232,7 @@ cse CMV project/
 > Outputs produced by this software **do not constitute legal advice** and cannot substitute for representation by a qualified legal advocate. Users must verify all citations and propositions against certified judicial reporters.
 #   A I - F O O D - Q U A L I T Y - D E T E C T I O N  
  
+=======
+# FOOD-QUALITY-DETECTION
+AI-based fruit quality detection system that analyses fruit images, identifies visible defects, and classifies fruit quality using machine learning and image processing.
+>>>>>>> 585ceaee6b91bf1d94bd1b6d3e06fc6a4affc1c0
